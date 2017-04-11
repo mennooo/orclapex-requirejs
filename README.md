@@ -83,7 +83,8 @@ The baseUrl must refer to the path where main.js, module1.js and module2.js can 
 
 ## RequireJS in APEX
 
-For now, only Oracle JET charts use RequireJS. APEX does everything for you:
+For now, only the charts of Oracle JET charts are used in APEX. Oracle JET uses RequireJS. 
+When using these charts, APEX does everything for you:
 
 1. Add require.js to page
 2. Add requirejs.jetConfig.js to page
