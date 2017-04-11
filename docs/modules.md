@@ -15,6 +15,9 @@ In this project we'll build our own using RequireJS:
 
 There are other ways to create JavaScript modules but RequireJS removes the hassle with tracking dependencies between modules. The order of loading the modules (which are JavaScript files) is no longer relevant.
 
+# Contents
+- [Creating a module](#creating-a-module)
+
 ## Creating a module
 
 Wrapping everything into define().
