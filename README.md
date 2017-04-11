@@ -114,6 +114,24 @@ Documentation: http://docs.oracle.com/database/apex-5.1/AEAPI/APEX_JAVASCRIPT.ht
 - APEX_JAVASCRIPT.ADD_REQUIREJS
 - APEX_JAVASCRIPT.ADD_REQUIREJS_DEFINE
 
+It's not likely you will need these procedures to work with RequireJS because there is a better way, using File URLs.
+
+## File URLs
+
+You can load additional JavaScript files at several places:
+
+- User interface attributes
+- Plugin
+- Page
+
+In APEX 5.1 there is a new to reference them:
+
+[require jet]/myjs/main.js
+
+[require requirejs]/myjs/main.js
+
+For full documentation, check the help text in APEX.
+
 ## JavaScript functions for RequireJS
 
 ### apex.server.loadScript
