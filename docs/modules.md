@@ -23,6 +23,24 @@ You can set your module dependencies there.
 
 ## Attaching the library to the global scope
 
+With RequireJS your modules will only be available within `require` function calls. In APEX this is not what we want. 
+We need to make calls to the modules from dynamic actions, plugins, pages, etc. 
+
+If we don't attach the library to the global scope, we always have to use:
+
+```javascript
+require(['demo/message'], function (message) {
+  message.error("An error message");
+});
+```
+
+Instead we want this:
+```javascript
+demo.message.error("An error message");
+```
+
+I've added code in `demo.js` to make this possible.
+
 ## Setting require.config
 
 Do not change the BasePath: this will break JET charts. You can have only one active BasePath in your application.
