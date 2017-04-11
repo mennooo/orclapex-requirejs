@@ -50,6 +50,8 @@ Instead we want this:
 demo.message.error("An error message");
 ```
 
+The downside of the latter is that every module is always loaded, even when it's not going to be used. We can add some code in our application to make sure we only load the neccesary modules.
+
 I've added code in `demo.js` to make this possible.
 
 ## Setting require.config
