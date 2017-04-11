@@ -7,6 +7,66 @@ APEX 5.1 uses Oracle JET as their chart engine. Oracle JET uses RequireJS as the
 
 This is how it works.
 
+The first step is to create separate modules.
+
+```javascript
+// module1.js
+define([], function() {
+
+  // return public objects of this module
+  return {
+    text: "Hell world!"
+  }
+};
+```
+
+The define function is part of RequireJS. Now use this module inside another module.
+
+```javascript
+// module2.js
+
+// Load module1 as a dependency to this module
+define(['module1'], function(module1) {
+
+  function helloWorld() {
+    console.log(module1.text);
+  };
+
+  // return public objects of this module
+  return {
+    helloWorld: helloWorld
+  }
+};
+```
+
+To glue thing together we create our main file which uses the modules.
+
+```javascript
+// main.js
+
+// Require modules and execute some code
+require(['module2'], function(module2) {
+
+  module2.helloWorld();
+  
+};
+```
+
+To use main.js in our page, we have to load a script.
+
+1. require.js
+This is the external RequireJS library
+
+Finally we have to configure RequireJS and specify where our main.js file can be found.
+
+```javascript
+require.config({
+  baseUrl: "/another/path"
+});
+```
+
+The baseUrl must refer to the path where main.js, module1.js and module2.js can be found.
+
 ### Loading files
 
 
