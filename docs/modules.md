@@ -69,4 +69,6 @@ function getCurrentScriptUrl() {
 
 ## Changing $(document).ready
 
-An important feature of RequireJS is that modules are loaded asynchronous. This means the modules might not be loaded at $(document).ready. We can delay this event with https://api.jquery.com/jquery.holdready/
+An important feature of RequireJS is that modules are loaded asynchronous. This means the modules might not be loaded at $(document).ready. This means calls to `demo.message.error` can fail in dynamic actions that trigger **On Page Load**.
+
+We can delay this event with https://api.jquery.com/jquery.holdready/
