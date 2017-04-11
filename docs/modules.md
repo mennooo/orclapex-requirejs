@@ -18,6 +18,14 @@ There are other ways to create JavaScript modules but RequireJS removes the hass
 # Contents
 - [Creating a module](#creating-a-module)
 
+## Steps (basic)
+1. Create modules
+2. Create main file to configure RequireJS (the difficult part)
+3. Adding main file to APEX application
+
+## Steps (advanced)
+1. Use the optimizer
+
 ## Creating a module
 
 Wrapping everything into define().
