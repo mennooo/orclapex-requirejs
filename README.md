@@ -5,7 +5,7 @@ Sample project to demonstrate the usage of RequireJS in APEX 5.1+
 
 - Test if we need css
 - use file prefix
-See: https://apex.oracle.com/i/themes/theme_42/1.1/css/core/BarChart.css
+- Add CSS See: https://apex.oracle.com/i/themes/theme_42/1.1/css/core/BarChart.css
 
 ## Creating your own modules
 
