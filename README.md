@@ -1,11 +1,11 @@
 # apex-requirejs
 Sample project to demonstrate the usage of RequireJS in APEX 5.1+
 
-## How it works in APEX
-
 APEX 5.1 uses Oracle JET as their chart engine. Oracle JET uses RequireJS as their module dependency loader.
 
-This is how it works.
+## Basics
+
+This is how RequireJS works.
 
 The first step is to create separate modules.
 
