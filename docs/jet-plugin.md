@@ -6,6 +6,13 @@ http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html
 
 For this example, I will add the [Input Number component](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html?component=inputNumber&demo=inputNumber) to an APEX page as a plugin.
 
+## Our APEX page
+Add a new input item in a new region. Put the following in the region **text**.
+
+```html
+<input id="inputnumber-id"/>
+```
+
 ## widget.jetInputNumber.js
 
 ```javascript
@@ -31,3 +38,5 @@ To make it work, we need to load the file above and the Alta UI css file.
 ```
 
 
+
+Well done, you've just added your first JET component on your APEX page!
