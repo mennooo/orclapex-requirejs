@@ -14,6 +14,9 @@ You can download and install this demo application here:
 - [Wrap the JET Input Number in an APEX Plugin](wrap-the-jet-input-number-in-an-apex-plugin)
 
 ## Add the JET Input Number to an APEX page
+
+Page in demo application: Page 3
+
 Add a new input item in a new region. Put the following in the **region text**.
 
 ```html
@@ -49,6 +52,8 @@ To make it work, we need to load the file above and the Alta UI css file.
 Well done, you've just added your first JET component on your APEX page!
 
 ## Wrap the JET Input Number in an APEX Plugin
+
+Page in demo application: Page 4
 
 To make this item reusable across applications, we wrap our code in a plugin.
 
