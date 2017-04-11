@@ -81,9 +81,26 @@ require.config({
 
 The baseUrl must refer to the path where main.js, module1.js and module2.js can be found.
 
-### Loading files
+## RequireJS in APEX
 
+For now, only Oracle JET charts use RequireJS. APEX does everything for you:
 
+1. Add require.js to page
+2. Add requirejs.jetConfig.js to page
+3. Add widget.jetChart.js to serve as the main starting point
+
+In requirejs.jetConfig.js you can find the require.config call.
+
+In addition, several CSS files are loaded to make the charts look good. This is not a part of RequireJS.
+### oj-alta-notag-min.css
+
+Oracle JET uses the Alta UI system. Alta UI styles the JET framework.
+
+### Core.css
+In core.css you can find for instance a loading call to BarChart.css:
+@import url('core/BarChart.css');
+
+These files contain some specific styling for the individual JET components.
 
 ### PLSQL packages for RequireJS
 
