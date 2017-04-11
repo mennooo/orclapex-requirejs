@@ -69,7 +69,7 @@ To use main.js in our page, we have to load a script. This is the external Requi
 <script src="scripts/require.js"></script>
 ```
 
-Finally we have to configure RequireJS and specify where our main.js file can be found.
+Finally we have to configure RequireJS and specify where our `main.js` file can be found.
 
 ```html
 <script>
@@ -79,7 +79,7 @@ require.config({
 </script>
 ```
 
-The baseUrl must refer to the path where main.js, module1.js and module2.js can be found.
+The baseUrl must refer to the path where `main.js`, `module1.js` and `module2.js` can be found.
 
 ## RequireJS in APEX for Oracle JET charts
 
@@ -90,16 +90,18 @@ When using these charts, APEX does everything for you:
 2. Add requirejs.jetConfig.js to page
 3. Add widget.jetChart.js to serve as the main starting point
 
-In requirejs.jetConfig.js you can find the require.config call.
+In `requirejs.jetConfig.js` you can find the `require.config` call.
 
 In addition, several CSS files are loaded to make the charts look good. This is not a part of RequireJS.
 ### oj-alta-notag-min.css
 
-Oracle JET uses the Alta UI system. Alta UI styles the JET framework.
+Oracle JET uses the **Alta UI** system. **Alta UI** styles the JET framework.
 
 ### Core.css
-In core.css you can find for instance a loading call to BarChart.css:
+In `core.css` you can find for instance a loading call to BarChart.css
+```css
 @import url('core/BarChart.css');
+```
 
 These files contain some specific styling for the individual JET components.
 
@@ -126,9 +128,11 @@ You can load additional JavaScript files at several places:
 
 In APEX 5.1 there is a new to reference them:
 
+```
 [require jet]/myjs/main.js
 
 [require requirejs]/myjs/main.js
+```
 
 For full documentation, check the help text in APEX.
 
@@ -150,6 +154,8 @@ Not needed in general.
 ## Creating an Oracle JET plugin
 
 Take a look at the Cookbook to browse the components.
+
+http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html
 
 ### Loading Oracle JET
 - use file prefix: [require jet]/myjs/main.js
