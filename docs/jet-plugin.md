@@ -6,7 +6,15 @@ http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html
 
 For this example, I will add the [Input Number component](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html?component=inputNumber&demo=inputNumber) to an APEX page as a plugin.
 
+## widget.jetInputNumber.js
 
+```javascript
+require(['ojs/ojcore', 'jquery', 'ojs/ojinputnumber'],
+function(oj, $)
+{
+    $('inputnumber-id').ojInputNumber({'value': 10, 'max':100, 'min':0, 'step':2});
+});
+```
 
 ### Loading Oracle JET
 - use file prefix: [require jet]/myjs/main.js
