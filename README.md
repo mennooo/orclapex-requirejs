@@ -157,33 +157,13 @@ For more information about creating a new Oracle Jet Plugin, take a look in this
 
 [Creating a new Oracle JET Plugin](docs/jet-plugin.md)
 
-Take a look at the Cookbook to browse the components.
-
 
 
 ## Creating your own modules
 
-### First module
+For more information about creating your own RequireJS modules, take a look in this section
 
-Wrapping everything into define().
+[Creating a new Oracle JET Plugin](docs/modules.md)
 
-You can set your module dependencies there.
 
-### Setting require.config
-
-Do not change the BasePath: this will break JET charts.
-
-Instead, get the current path of your main script and use that to load the depending modules.
-
-```javascript
-function getCurrentScriptUrl() {
-  var scripts = document.getElementsByTagName("script");
-  // Current script is always the last one
-  return scripts[scripts.length-1].src;
-}
-```
-
-### Changing $(document).ready
-
-An important feature of RequireJS is that modules are loaded asynchronous. This means the modules might not be loaded at $(document).ready. We can delay this event with https://api.jquery.com/jquery.holdready/
 
