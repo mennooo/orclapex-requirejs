@@ -1,7 +1,22 @@
 # apex-requirejs
 Sample project to demonstrate the usage of RequireJS in APEX 5.1+
 
+## How it works in APEX
+
+### Loading files
+
+
+
+### PLSQL packages for RequireJS
+
+APEX_JAVASCRIPT
+
+### 
+
+### 
+
 ## Creating an Oracle JET plugin
+
 
 - Test if we need css
 - use file prefix
@@ -9,5 +24,13 @@ Sample project to demonstrate the usage of RequireJS in APEX 5.1+
 
 ## Creating your own modules
 
-## PLSQL packages for RequireJS
+### First module
+
+### Setting require.config
+
+### Changing $(document).ready
+
+
+
+
 
