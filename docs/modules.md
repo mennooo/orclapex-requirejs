@@ -1,5 +1,20 @@
 # Creating your own RequireJS modules
 
+The goal is to create a JavaScript library similar to the APEX JavaScript API.
+
+The APEX JavaScript API contains a lot of modules such as:
+
+- apex.page
+- apex.server
+- apex.util
+- apex.widget
+
+In this project we'll build our own:
+
+- demo.message
+
+
+
 ### First module
 
 Wrapping everything into define().
