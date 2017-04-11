@@ -3,6 +3,16 @@ Sample project to demonstrate the usage of RequireJS in APEX 5.1+
 
 APEX 5.1 uses Oracle JET as their chart engine. Oracle JET uses RequireJS as their module dependency loader.
 
+## Content
+
+- [Why](#why)
+- [Basics](#basics)
+- [RequireJS in APEX for Oracle JET charts](#requirejs-in-apex-for-oracle-jet-charts)
+- [Additional support for RequireJS in APEX](#additional-support-for-requirejs-in-apex)
+- [Creating an Oracle JET Plugin](#creating-an-oracle-jet-plugin)
+- [Creating your own RequireJS modules](#creating-your-own-requirejs-modules)
+- [Useful resources](#useful-resources)
+
 ## Why
 
 The main goal of RequireJS is to let you work with small JavaScript modules in an application that uses lots of JavaScript code.
@@ -118,7 +128,7 @@ Documentation: http://docs.oracle.com/database/apex-5.1/AEAPI/APEX_JAVASCRIPT.ht
 
 It's not likely you will need these procedures to work with RequireJS because there is a better way, using File URLs.
 
-## File URLs
+### File URLs
 
 You can load additional JavaScript files at several places:
 
@@ -136,20 +146,19 @@ In APEX 5.1 there is a new to reference them:
 
 For full documentation, check the help text in APEX.
 
-## JavaScript functions for RequireJS
+### JavaScript functions for RequireJS
 
-### apex.server.loadScript
+#### apex.server.loadScript
 Documentation: http://docs.oracle.com/database/apex-5.1/AEAPI/apex-server-namespace.htm#AEAPI-GUID-BE3207FA-E766-4F0D-9665-7CF6631E7430
 
 This function can load a module and attach it to the global scope.
 
 If the optimizer is used, then no attachment to global.
 
-### apex.widget.jet (undocumented)
+#### apex.widget.jet (undocumented)
 Purpose: Initializing a JET chart
 
 Not needed in general.
-
 
 ## Creating an Oracle JET Plugin
 
@@ -157,13 +166,11 @@ For more information about creating a new Oracle Jet Plugin, take a look in this
 
 [Creating a new Oracle JET Plugin](docs/jet-plugin.md)
 
-
-
-## Creating your own modules
+## Creating your own RequireJS modules
 
 For more information about creating your own RequireJS modules, take a look in this section
 
 [Creating a new Oracle JET Plugin](docs/modules.md)
 
-
+## Resources
 
