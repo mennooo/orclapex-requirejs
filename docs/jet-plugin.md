@@ -12,12 +12,18 @@ For this example, I will add the [Input Number component](http://www.oracle.com/
 require(['ojs/ojcore', 'jquery', 'ojs/ojinputnumber'],
 function(oj, $)
 {
-    $('inputnumber-id').ojInputNumber({'value': 10, 'max':100, 'min':0, 'step':2});
+    $('#inputnumber-id').ojInputNumber({'value': 10, 'max':100, 'min':0, 'step':2});
 });
 ```
 
-### Loading Oracle JET
-- use file prefix: [require jet]/myjs/main.js
+## Loading Files
 
-### Loading CSS
-- Add CSS See: https://apex.oracle.com/i/themes/theme_42/1.1/css/core/BarChart.css
+To make it work, we need to load the file above and the Alta UI css file.
+
+### JavaScript File URLs
+[require jet]#APP_IMAGES#widget.jetInputNumber.js
+
+### CSS File URLs
+#IMAGE_PREFIX#libraries/oraclejet/2.0.2/css/libs/oj/v2.0.2/alta/oj-alta-notag-min.css
+
+
