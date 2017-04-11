@@ -9,21 +9,23 @@ The APEX JavaScript API contains a lot of modules such as:
 - apex.util
 - apex.widget
 
-In this project we'll build our own:
+In this project we'll build our own using RequireJS:
 
 - demo.message
 
+There are other ways to create JavaScript modules but RequireJS removes the hassle with tracking dependencies between modules. The order of loading the modules (which are JavaScript files) is no longer relevant.
 
-
-### First module
+## First module
 
 Wrapping everything into define().
 
 You can set your module dependencies there.
 
-### Setting require.config
+## Attaching the library to the global scope
 
-Do not change the BasePath: this will break JET charts.
+## Setting require.config
+
+Do not change the BasePath: this will break JET charts. You can have only one active BasePath in your application.
 
 Instead, get the current path of your main script and use that to load the depending modules.
 
@@ -35,6 +37,6 @@ function getCurrentScriptUrl() {
 }
 ```
 
-### Changing $(document).ready
+## Changing $(document).ready
 
 An important feature of RequireJS is that modules are loaded asynchronous. This means the modules might not be loaded at $(document).ready. We can delay this event with https://api.jquery.com/jquery.holdready/
