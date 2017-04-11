@@ -39,6 +39,56 @@ To make it work, we need to load the file above and the Alta UI css file.
 #IMAGE_PREFIX#libraries/oraclejet/2.0.2/css/libs/oj/v2.0.2/alta/oj-alta-notag-min.css
 ```
 
-
-
 Well done, you've just added your first JET component on your APEX page!
+
+## Wrap the JET Input Number in an APEX Plugin
+
+To make this item reusable across applications, we wrap our code in a plugin.
+
+Settings:
+- Name: JET Input Number
+- Internal name: JET.INPUT_NUMBER
+- Render procedure: render
+
+### Render procedure
+```sql
+procedure render (
+    p_item   in            apex_plugin.t_item,
+    p_plugin in            apex_plugin.t_plugin,
+    p_param  in            apex_plugin.t_item_render_param,
+    p_result in out nocopy apex_plugin.t_item_render_result )
+is
+begin
+    
+    htp.prn('<input id="' || p_item.name || '"/>');
+    
+    apex_javascript.add_onload_code (
+        p_code => 'jetInputNumber.init({id: "' || p_item.name || '"});',
+        p_key  => 'jetInputNumber' );
+  
+end render;
+```
+
+### File URLs to load
+
+#### CSS
+```
+#IMAGE_PREFIX#libraries/oraclejet/2.0.2/css/libs/oj/v2.0.2/alta/oj-alta-notag-min.css
+```
+
+### JavaScript
+```
+[require jet]#PLUGIN_FILES#widget.jetInputNumber.js
+```
+
+The file `widget.jetInputNumber.js` is changed a little bit to receive the item ID as a parameter.
+
+```javascript
+var jetInputNumber = {
+  init: function(options) {
+    require(['ojs/ojcore', 'jquery', 'ojs/ojinputnumber'], function(oj, $) {
+        $('#' + options.id).ojInputNumber({'value': 10, 'max':100, 'min':0, 'step':2});
+    });
+  }
+};
+```
