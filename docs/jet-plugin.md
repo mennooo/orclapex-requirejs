@@ -21,9 +21,13 @@ function(oj, $)
 To make it work, we need to load the file above and the Alta UI css file.
 
 ### JavaScript File URLs
+```
 [require jet]#APP_IMAGES#widget.jetInputNumber.js
+```
 
 ### CSS File URLs
+```
 #IMAGE_PREFIX#libraries/oraclejet/2.0.2/css/libs/oj/v2.0.2/alta/oj-alta-notag-min.css
+```
 
 
