@@ -107,11 +107,11 @@ These files contain some specific styling for the individual JET components.
 
 ### PLSQL packages for RequireJS
 
-### APEX_JAVASCRIPT
+#### APEX_JAVASCRIPT
 
 Documentation: http://docs.oracle.com/database/apex-5.1/AEAPI/APEX_JAVASCRIPT.htm#AEAPI534 
 
-#### APEX_JAVASCRIPT.ADD_LIBRARY
+##### APEX_JAVASCRIPT.ADD_LIBRARY
 
 
 ## JavaScript functions for RequireJS
