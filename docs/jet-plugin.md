@@ -7,8 +7,8 @@ http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html
 For this example, I will add the [Input Number component](http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html?component=inputNumber&demo=inputNumber) to an APEX page as a plugin.
 
 # Contents
-[Add the JET Input Number to an APEX page](add-the-jet-input-number-to-an-apex-page)
-[Wrap the JET Input Number in an APEX Plugin](wrap-the-jet-input-number-in-an-apex-plugin)
+- [Add the JET Input Number to an APEX page](add-the-jet-input-number-to-an-apex-page)
+- [Wrap the JET Input Number in an APEX Plugin](wrap-the-jet-input-number-in-an-apex-plugin)
 
 ## Add the JET Input Number to an APEX page
 Add a new input item in a new region. Put the following in the **region text**.
