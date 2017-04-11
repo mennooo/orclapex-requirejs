@@ -107,14 +107,19 @@ These files contain some specific styling for the individual JET components.
 
 ### PLSQL packages for RequireJS
 
-APEX_JAVASCRIPT
+### APEX_JAVASCRIPT
+
+Documentation: http://docs.oracle.com/database/apex-5.1/AEAPI/APEX_JAVASCRIPT.htm#AEAPI534 
+
+#### APEX_JAVASCRIPT.ADD_LIBRARY
+
 
 ## JavaScript functions for RequireJS
 
 ### apex.server.loadScript
 
-Purpose: loading an external script. 
-http://docs.oracle.com/database/apex-5.1/AEAPI/apex-server-namespace.htm#AEAPI-GUID-BE3207FA-E766-4F0D-9665-7CF6631E7430
+Purpose: loading an external script with JavaScript. 
+Documentation: http://docs.oracle.com/database/apex-5.1/AEAPI/apex-server-namespace.htm#AEAPI-GUID-BE3207FA-E766-4F0D-9665-7CF6631E7430
 
 This can load a module and attach it to the global scope.
 
