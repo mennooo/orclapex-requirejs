@@ -15,7 +15,7 @@ In this project we'll build our own using RequireJS:
 
 There are other ways to create JavaScript modules but RequireJS removes the hassle with tracking dependencies between modules. The order of loading the modules (which are JavaScript files) is no longer relevant.
 
-## First module
+## Creating a module
 
 Wrapping everything into define().
 
@@ -72,3 +72,11 @@ function getCurrentScriptUrl() {
 An important feature of RequireJS is that modules are loaded asynchronous. This means the modules might not be loaded at $(document).ready. This means calls to `demo.message.error` can fail in dynamic actions that trigger **On Page Load**.
 
 We can delay this event with https://api.jquery.com/jquery.holdready/
+
+## Using the Optimizer
+
+Documentation: http://requirejs.org/docs/optimization.html
+
+
+
+Hopefully this will help your create your own library with RequireJS in APEX!
