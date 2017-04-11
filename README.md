@@ -37,9 +37,13 @@ Take a look at the Cookbook to browse the components.
 
 ### First module
 
-Wrapping everything into require()
+Wrapping everything into define().
+
+You can set your module dependencies there.
 
 ### Setting require.config
+
+Do not change the BasePath: this will break JET charts.
 
 ### Changing $(document).ready
 
