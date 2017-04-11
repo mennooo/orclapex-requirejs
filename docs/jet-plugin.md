@@ -92,3 +92,9 @@ var jetInputNumber = {
   }
 };
 ```
+
+Upload this file in your plugin.
+
+Well done, now you're ready to use the plugin!
+
+Ofcourse, this is the most basic plugin and you should add more properties in the plugin to make it useful.
