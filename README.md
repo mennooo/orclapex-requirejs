@@ -170,7 +170,7 @@ For more information about creating a new Oracle Jet Plugin, take a look in this
 
 For more information about creating your own RequireJS modules, take a look in this section
 
-[Creating a new Oracle JET Plugin](docs/modules.md)
+[Creating your own RequireJS modules](docs/modules.md)
 
 ## Resources
 
