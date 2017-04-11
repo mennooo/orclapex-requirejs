@@ -3,10 +3,18 @@ Sample project to demonstrate the usage of RequireJS in APEX 5.1+
 
 APEX 5.1 uses Oracle JET as their chart engine. Oracle JET uses RequireJS as their module dependency loader.
 
+## Why
+
+The main goal of RequireJS is to let you work with small JavaScript modules in an application that uses lots of JavaScript code.
+The benefits of this approach is to create reusable pieces of code and create a single point of definition.
+
+There are other ways to create JavaScript modules but RequireJS removes the hassle with tracking dependencies between modules. The order of loading the modules (which are JavaScript files) is no longer relevant.
+
 ## Basics
 
 This is how RequireJS works.
 
+### Creating modules
 The first step is to create separate modules.
 
 ```javascript
@@ -39,7 +47,8 @@ define(['module1'], function(module1) {
 };
 ```
 
-To glue thing together we create our main file which uses the modules.
+### Creating the main entry point
+To glue thing together we create our main file which uses the modules. This is the starting point for RequireJS to load all depending modules.
 
 ```javascript
 // main.js
@@ -52,17 +61,22 @@ require(['module2'], function(module2) {
 };
 ```
 
-To use main.js in our page, we have to load a script.
+### Adding RequireJS to a page
 
-1. require.js
-This is the external RequireJS library
+To use main.js in our page, we have to load a script. This is the external RequireJS library which you can download on the requirejs.org website.
+
+```html
+<script src="scripts/require.js"></script>
+```
 
 Finally we have to configure RequireJS and specify where our main.js file can be found.
 
-```javascript
+```html
+<script>
 require.config({
   baseUrl: "/another/path"
 });
+</script>
 ```
 
 The baseUrl must refer to the path where main.js, module1.js and module2.js can be found.
