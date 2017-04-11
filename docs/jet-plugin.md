@@ -1,5 +1,7 @@
 # Creating a new Oracle JET Plugin
 
+Take a look at the Cookbook to browse the components.
+
 http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html
 
 ### Loading Oracle JET
