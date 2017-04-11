@@ -19,7 +19,17 @@ APEX_JAVASCRIPT
 
 apex.server.loadScript
 
-apex.widget.jet
+Purpose: loading an external script. 
+http://docs.oracle.com/database/apex-5.1/AEAPI/apex-server-namespace.htm#AEAPI-GUID-BE3207FA-E766-4F0D-9665-7CF6631E7430
+
+This can load a module and attach it to the global scope.
+
+If the optimizer is used, then no attachment to global.
+
+apex.widget.jet (undocumented)
+Purpose: Initializing a JET chart
+
+Not needed in general.
 
 ### 
 
