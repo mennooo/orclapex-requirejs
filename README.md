@@ -151,17 +151,15 @@ Purpose: Initializing a JET chart
 Not needed in general.
 
 
-## Creating an Oracle JET plugin
+## Creating an Oracle JET Plugin
+
+For more information about creating a new Oracle Jet Plugin, take a look in this section
+
+[Creating a new Oracle JET Plugin](docs/jet-plugin.md)
 
 Take a look at the Cookbook to browse the components.
 
-http://www.oracle.com/webfolder/technetwork/jet/jetCookbook.html
 
-### Loading Oracle JET
-- use file prefix: [require jet]/myjs/main.js
-
-### Loading CSS
-- Add CSS See: https://apex.oracle.com/i/themes/theme_42/1.1/css/core/BarChart.css
 
 ## Creating your own modules
 
