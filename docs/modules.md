@@ -43,7 +43,17 @@ I've added code in `demo.js` to make this possible.
 
 ## Setting require.config
 
-Do not change the BasePath: this will break JET charts. You can have only one active BasePath in your application.
+In the require.config file we can configure where our library is located.
+
+```javascript
+requirejs.config({
+  paths: {
+    demo: gBasePath + 'demo'
+  }
+});
+```
+
+Do not change the `baseUrl`: this will break JET charts. You can have only one active `baseUrl` in your application.
 
 Instead, get the current path of your main script and use that to load the depending modules.
 
