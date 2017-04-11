@@ -43,6 +43,8 @@ I've added code in `demo.js` to make this possible.
 
 ## Setting require.config
 
+Documentation: http://requirejs.org/docs/api.html#config
+
 In the require.config file we can configure where our library is located.
 
 ```javascript
