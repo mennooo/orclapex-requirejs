@@ -10,8 +10,8 @@ You can download and install this demo application here:
 - [App f100 export](ld)
 
 # Contents
-- [Add the JET Input Number to an APEX page](add-the-jet-input-number-to-an-apex-page)
-- [Wrap the JET Input Number in an APEX Plugin](wrap-the-jet-input-number-in-an-apex-plugin)
+- [Add the JET Input Number to an APEX page](#add-the-jet-input-number-to-an-apex-page)
+- [Wrap the JET Input Number in an APEX Plugin](#wrap-the-jet-input-number-in-an-apex-plugin)
 
 ## Add the JET Input Number to an APEX page
 
