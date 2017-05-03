@@ -9,17 +9,27 @@
 
 */
 
-
+//$.holdReady( true );
 
 (function() {
 
-  var gBasePath = apex_img_dir + "demo/js/";
+  // Get our current baseUrl
+  function getBaseUrl() {
+    var scripts = document.getElementsByTagName("script"),
+        script = scripts[scripts.length-1].src,
+        slugs = script.split('/');
+
+    slugs.pop();
+
+    return slugs.join('/') + '/';
+  }
+
+  var baseUrl = getBaseUrl();
 
   requirejs.config({
-    baseUrl: '.',
     paths: {
-      lib: gBasePath + 'lib',
-      app: gBasePath + 'app'
+      lib: baseUrl + 'lib',
+      app: baseUrl + 'app'
     }
   });
 

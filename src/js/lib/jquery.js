@@ -1,3 +1,3 @@
 define(function() {
-  console.log('lala')
+    return jQuery;
 });

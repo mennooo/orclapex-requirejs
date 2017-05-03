@@ -7,10 +7,22 @@
 
 */
 
-// this module must be present before loading the others
-require(['app/addModules'], function (addModules) {
 
-  // require all modules in this nested call
-  require(['app/message'], addModules);
+
+// this module must be present before loading the others
+define(['app/addModules'], function (addModules) {
+
+  return {
+    addModules: addModules,
+    setNamespace: function(namespace) {
+      requirejs.config({
+        config: {
+          "app/addModules": {
+            namespace: namespace
+          }
+        }
+      });
+    }
+  };
 
 });

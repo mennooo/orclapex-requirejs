@@ -40,7 +40,7 @@
 });*/
 
 
-define(['lib/pnotify.custom', 'jquery'], function($) {
+define(['lib/pnotify.custom'], function() {
 
   var deferred = $.Deferred();
 

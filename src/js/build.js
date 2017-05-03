@@ -1,17 +1,20 @@
 ({
+  config: {
+    "app/addModules": {
+      namespace: "demo"
+    }
+  },
   baseUrl: '.',
-  findNestedDependencies: false,
-  name: 'demo',
-  out: "demo-build.js",
+  findNestedDependencies: true,
+  name: 'app',
+  out: "app-build.js",
   optimize: "none",
+  paths: {
+    "jquery": "lib/jquery"
+  },
   shim: {
     "jquery": {
       exports: ["jQuery", "$"]
-    },
-      "jQuery": {
-        exports: ["jquery", "$"]
-      }
-  },
-  wrapShim: true,
-  keepAmdefine: true
+    }
+  }
 })
