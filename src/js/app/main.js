@@ -12,17 +12,19 @@
 // this module must be present before loading the others
 define(['app/addModules'], function (addModules) {
 
+  function setNamespace(namespace) {
+    requirejs.config({
+      config: {
+        "app/addModules": {
+          namespace: namespace
+        }
+      }
+    });
+  };
+
   return {
     addModules: addModules,
-    setNamespace: function(namespace) {
-      requirejs.config({
-        config: {
-          "app/addModules": {
-            namespace: namespace
-          }
-        }
-      });
-    }
+    setNamespace: setNamespace
   };
 
 });

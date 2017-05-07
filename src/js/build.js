@@ -1,9 +1,4 @@
 ({
-  config: {
-    "app/addModules": {
-      namespace: "demo"
-    }
-  },
   baseUrl: '.',
   findNestedDependencies: true,
   name: 'app',

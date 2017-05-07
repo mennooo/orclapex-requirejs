@@ -14,6 +14,8 @@ define(['module'], function(module){
     window[module.config().namespace] = {};
     var namespace = window[module.config().namespace];
 
+
+
     // Add all modules under demo namespace
     $.when.apply($, Array.from(arguments)).then(function(modules) {
 
