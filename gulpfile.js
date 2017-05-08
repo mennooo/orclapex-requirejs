@@ -21,7 +21,7 @@ gulp.task('optimize', function() {
         }))
         .pipe(rename("app-build.js"))
         .pipe(gulp.dest('src/js'))
-        .pipe(notify("Done"));;
+        .pipe(notify("Done"));
 });
 
 gulp.task('watch', function() {

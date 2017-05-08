@@ -9,7 +9,7 @@ $.holdReady( true );
 window.starttime = performance.now();
 
 // Start with the main entry point
-requirejs(["app/main"], function(main) {
+require(["app/main"], function(main) {
 
   // Under which namespace should the modules reside
   main.setNamespace("demo");
