@@ -6,22 +6,23 @@
 
 define('app/addModules',['module'], function(module){
 
-
-
   return function() {
 
     // Get current namespace
     window[module.config().namespace] = {};
     var namespace = window[module.config().namespace];
 
-
-
     // Add all modules under demo namespace
-    $.when.apply($, Array.from(arguments)).then(function(modules) {
+    $.when.apply($, Array.from(arguments)).then(function() {
+      
+      var modules = Array.from(arguments);
 
-      $.extend(namespace, modules);
+      modules.forEach(function(module){
+        $.extend(namespace, module);
+      });
+
       $.holdReady( false );
-      console.log("RequireJS loading time: ", performance.now() - window.starttime)
+      console.log("RequireJS loading time: ", performance.now() - window.starttime);
 
     }, function(e) {
       console.log("Not all modules could be loaded");
@@ -61,1037 +62,1338 @@ define('app/main',['app/addModules'], function (addModules) {
 
 });
 
-(function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define("Noty", [], factory);
-	else if(typeof exports === 'object')
-		exports["Noty"] = factory();
-	else
-		root["Noty"] = factory();
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
-/******/
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// identity function for calling harmony imports with the correct context
-/******/ 	__webpack_require__.i = function(value) { return value; };
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, {
-/******/ 				configurable: false,
-/******/ 				enumerable: true,
-/******/ 				get: getter
-/******/ 			});
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/* PNotify modules included in this custom build file:
+brighttheme
+buttons
+desktop
+mobile
+*/
+/*
+PNotify 3.2.0 sciactive.com/pnotify/
+(C) 2015 Hunter Perrin; Google, Inc.
+license Apache-2.0
+*/
+/*
+ * ====== PNotify ======
+ *
+ * http://sciactive.com/pnotify/
+ *
+ * Copyright 2009-2015 Hunter Perrin
+ * Copyright 2015 Google, Inc.
+ *
+ * Licensed under Apache License, Version 2.0.
+ * 	http://www.apache.org/licenses/LICENSE-2.0
+ */
 
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.css = exports.deepExtend = exports.animationEndEvents = undefined;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-exports.inArray = inArray;
-exports.stopPropagation = stopPropagation;
-exports.generateID = generateID;
-exports.delegate = delegate;
-exports.outerHeight = outerHeight;
-exports.addListener = addListener;
-exports.removeListener = removeListener;
-exports.live = live;
-exports.findParent = findParent;
-exports.findChild = findChild;
-exports.hasClass = hasClass;
-exports.addClass = addClass;
-exports.removeClass = removeClass;
-exports.remove = remove;
-exports.classList = classList;
-exports.visibilityChangeFlow = visibilityChangeFlow;
-
-var _api = __webpack_require__(1);
-
-var API = _interopRequireWildcard(_api);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-// shims
-if (window.HTMLElement) {
-  HTMLElement.prototype.matches = HTMLElement.prototype.matches || HTMLElement.prototype.matchesSelector || HTMLElement.prototype.webkitMatchesSelector || HTMLElement.prototype.mozMatchesSelector || HTMLElement.prototype.msMatchesSelector || HTMLElement.prototype.oMatchesSelector;
-}
-
-var animationEndEvents = exports.animationEndEvents = 'webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend';
-
-function inArray(needle, haystack, argStrict) {
-  var key = '';
-  var strict = !!argStrict;
-  if (strict) {
-    for (key in haystack) {
-      if (haystack[key] === needle) {
-        return true;
-      }
-    }
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as a module.
+    define('pnotify', ['jquery'], function($){
+      return factory($, root);
+    });
+  } else if (typeof exports === 'object' && typeof module !== 'undefined') {
+    // CommonJS
+    module.exports = factory(require('jquery'), global || root);
   } else {
-    for (key in haystack) {
-      if (haystack[key] == needle) {
-        return true;
-      }
-    }
+    // Browser globals
+    root.PNotify = factory(root.jQuery, root);
   }
-  return false;
-}
-
-function stopPropagation(evt) {
-  evt = evt || window.event;
-  if (typeof evt.stopPropagation !== "undefined") {
-    evt.stopPropagation();
-  } else {
-    evt.cancelBubble = true;
-  }
-}
-
-var deepExtend = exports.deepExtend = function deepExtend(out) {
-  out = out || {};
-
-  for (var i = 1; i < arguments.length; i++) {
-    var obj = arguments[i];
-
-    if (!obj) continue;
-
-    for (var key in obj) {
-      if (obj.hasOwnProperty(key)) {
-        if (Array.isArray(obj[key])) out[key] = obj[key];else if (_typeof(obj[key]) === 'object') out[key] = deepExtend(out[key], obj[key]);else out[key] = obj[key];
-      }
-    }
-  }
-
-  return out;
-};
-
-function generateID() {
-  var prefix = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-
-  var id = 'noty_' + prefix + '_';
-
-  id += 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
-    var r = Math.random() * 16 | 0,
-        v = c == 'x' ? r : r & 0x3 | 0x8;
-    return v.toString(16);
-  });
-
-  return id;
-}
-
-// @todo - [needim] - cross browser test
-function delegate(el, evt, sel, handler) {
-  el.addEventListener(evt, function (event) {
-    var t = event.target;
-    while (t && t !== this) {
-      if (t.matches(sel)) {
-        handler.call(t, event);
-      }
-      t = t.parentNode;
-    }
-  });
-}
-
-function outerHeight(el) {
-  var height = el.offsetHeight;
-  var style = getComputedStyle(el);
-
-  height += parseInt(style.marginTop) + parseInt(style.marginBottom);
-  return height;
-}
-
-var css = exports.css = function () {
-  var cssPrefixes = ['Webkit', 'O', 'Moz', 'ms'],
-      cssProps = {};
-
-  function camelCase(string) {
-    return string.replace(/^-ms-/, 'ms-').replace(/-([\da-z])/gi, function (match, letter) {
-      return letter.toUpperCase();
-    });
-  }
-
-  function getVendorProp(name) {
-    var style = document.body.style;
-    if (name in style) return name;
-
-    var i = cssPrefixes.length,
-        capName = name.charAt(0).toUpperCase() + name.slice(1),
-        vendorName;
-    while (i--) {
-      vendorName = cssPrefixes[i] + capName;
-      if (vendorName in style) return vendorName;
-    }
-
-    return name;
-  }
-
-  function getStyleProp(name) {
-    name = camelCase(name);
-    return cssProps[name] || (cssProps[name] = getVendorProp(name));
-  }
-
-  function applyCss(element, prop, value) {
-    prop = getStyleProp(prop);
-    element.style[prop] = value;
-  }
-
-  return function (element, properties) {
-    var args = arguments,
-        prop,
-        value;
-
-    if (args.length == 2) {
-      for (prop in properties) {
-        value = properties[prop];
-        if (value !== undefined && properties.hasOwnProperty(prop)) applyCss(element, prop, value);
-      }
-    } else {
-      applyCss(element, args[1], args[2]);
-    }
+}(typeof window !== "undefined" ? window : this, function($, root){
+var init = function(root){
+  var default_stack = {
+    dir1: "down",
+    dir2: "left",
+    push: "bottom",
+    spacing1: 36,
+    spacing2: 36,
+    context: $("body"),
+    modal: false
   };
-}();
-
-function addListener(el, events, cb) {
-  var useCapture = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
-
-  events = events.split(' ');
-  for (var i = 0; i < events.length; i++) {
-    if (document.addEventListener) {
-      el.addEventListener(events[i], cb, useCapture);
-    } else if (document.attachEvent) {
-      el.attachEvent('on' + events[i], cb);
-    }
-  }
-}
-
-function removeListener(el, events, cb) {
-  events = events.split(' ');
-  for (var i = 0; i < events.length; i++) {
-    if (document.removeEventListener) {
-      el.removeEventListener(events[i], cb, false);
-    } else if (document.attachEvent) {
-      el.attachEvent('on' + events[i], cb);
-    }
-  }
-}
-
-function live(eventType, elementQuerySelector, cb) {
-  document.addEventListener(eventType, function (event) {
-    var qs = document.querySelectorAll(elementQuerySelector);
-    if (qs) {
-      var el = event.target;
-      var index = void 0;
-      while (el && (index = Array.prototype.indexOf.call(qs, el)) === -1) {
-        el = el.parentElement;
+  var posTimer, // Position all timer.
+    body,
+    jwindow = $(root);
+  // Set global variables.
+  var do_when_ready = function(){
+    body = $("body");
+    PNotify.prototype.options.stack.context = body;
+    jwindow = $(root);
+    // Reposition the notices when the window resizes.
+    jwindow.bind('resize', function(){
+      if (posTimer) {
+        clearTimeout(posTimer);
       }
-
-      if (index > -1) {
-        cb.call(el, event);
-      }
-    }
-  });
-}
-
-function findParent(el, cls) {
-  while ((el = el.parentElement) && !el.classList.contains(cls)) {}
-  return el;
-}
-
-function findChild(el, cls) {
-  var children = el.children;
-  for (var i = 0; i < children.length; i++) {
-    var child = children[i];
-    if (child.classList.contains(cls)) {
-      return child;
-    }
-  }
-}
-
-function hasClass(element, name) {
-  var list = typeof element == 'string' ? element : classList(element);
-  return list.indexOf(' ' + name + ' ') >= 0;
-}
-
-function addClass(element, name) {
-  var oldList = classList(element),
-      newList = oldList + name;
-
-  if (hasClass(oldList, name)) return;
-
-  // Trim the opening space.
-  element.className = newList.substring(1);
-}
-
-function removeClass(element, name) {
-  var oldList = classList(element),
-      newList;
-
-  if (!hasClass(element, name)) return;
-
-  // Replace the class name.
-  newList = oldList.replace(' ' + name + ' ', ' ');
-
-  // Trim the opening and closing spaces.
-  element.className = newList.substring(1, newList.length - 1);
-}
-
-function remove(element) {
-  element.parentNode.removeChild(element);
-}
-
-function classList(element) {
-  return (' ' + (element && element.className || '') + ' ').replace(/\s+/gi, ' ');
-}
-
-function visibilityChangeFlow() {
-  function stopAll() {
-    Object.keys(API.Store).forEach(function (id) {
-      if (API.Store.hasOwnProperty(id)) {
-        setTimeout(function () {
-          API.Store[id].stop();
-        }, 100);
-      }
+      posTimer = setTimeout(function(){
+        PNotify.positionAll(true);
+      }, 10);
     });
-  }
-
-  function resumeAll() {
-    Object.keys(API.Store).forEach(function (id) {
-      if (API.Store.hasOwnProperty(id)) {
-        setTimeout(function () {
-          API.Store[id].resume();
-        }, 100);
-      }
-    });
-  }
-
-  addListener(window, 'blur', stopAll);
-  addListener(window, 'focus', resumeAll);
-}
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Defaults = exports.Store = exports.Queues = exports.DefaultMaxVisible = undefined;
-exports.getQueueCounts = getQueueCounts;
-exports.addToQueue = addToQueue;
-exports.removeFromQueue = removeFromQueue;
-exports.queueRender = queueRender;
-exports.ghostFix = ghostFix;
-exports.build = build;
-exports.hasButtons = hasButtons;
-exports.queueClose = queueClose;
-exports.dequeueClose = dequeueClose;
-exports.fire = fire;
-
-var _utils = __webpack_require__(0);
-
-var Utils = _interopRequireWildcard(_utils);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-var DefaultMaxVisible = exports.DefaultMaxVisible = 5;
-
-var Queues = exports.Queues = {
-  global: {
-    maxVisible: DefaultMaxVisible,
-    queue: []
-  }
-};
-
-var Store = exports.Store = {};
-
-var Defaults = exports.Defaults = {
-  type: 'alert',
-  layout: 'topRight',
-  theme: 'mint',
-  text: '',
-  timeout: false,
-  progressBar: true,
-  closeWith: ['click'],
-  animation: {
-    open: 'noty_effects_open',
-    close: 'noty_effects_close'
-  },
-  id: false,
-  force: false,
-  killer: false,
-  queue: 'global',
-  container: false,
-  buttons: [],
-  callbacks: {
-    beforeShow: null,
-    onShow: null,
-    afterShow: null,
-    onClose: null,
-    afterClose: null,
-    onHover: null,
-    onTemplate: null
-  }
-};
-
-/**
- * @param {string} queueName
- * @return {object}
- */
-function getQueueCounts() {
-  var queueName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'global';
-
-  var count = 0;
-  var max = DefaultMaxVisible;
-
-  if (Queues.hasOwnProperty(queueName)) {
-    max = Queues[queueName].maxVisible;
-    Object.keys(Store).forEach(function (i) {
-      if (Store[i].options.queue == queueName && !Store[i].closed) count++;
-    });
-  }
-
-  return {
-    current: count,
-    maxVisible: max
   };
-}
-
-/**
- * @param {Noty} ref
- * @return {void}
- */
-function addToQueue(ref) {
-  if (!Queues.hasOwnProperty(ref.options.queue)) Queues[ref.options.queue] = { maxVisible: DefaultMaxVisible, queue: [] };
-
-  Queues[ref.options.queue].queue.push(ref);
-}
-
-/**
- * @param {Noty} ref
- * @return {void}
- */
-function removeFromQueue(ref) {
-  if (Queues.hasOwnProperty(ref.options.queue)) {
-    var queue = [];
-    Object.keys(Queues[ref.options.queue].queue).forEach(function (i) {
-      if (Queues[ref.options.queue].queue[i].id != ref.id) {
-        queue.push(Queues[ref.options.queue].queue[i]);
-      }
-    });
-    Queues[ref.options.queue].queue = queue;
-  }
-}
-
-/**
- * @param {string} queueName
- * @return {void}
- */
-function queueRender() {
-  var queueName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'global';
-
-  if (Queues.hasOwnProperty(queueName)) {
-    var noty = Queues[queueName].queue.shift();
-
-    if (noty) noty.show();
-  }
-}
-
-/**
- * @param {Noty} ref
- * @return {void}
- */
-function ghostFix(ref) {
-  var ghostID = Utils.generateID('ghost');
-  var ghost = document.createElement('div');
-  ghost.setAttribute('id', ghostID);
-  Utils.css(ghost, {
-    height: Utils.outerHeight(ref.barDom) + 'px'
-  });
-
-  ref.barDom.insertAdjacentHTML('afterend', ghost.outerHTML);
-
-  Utils.remove(ref.barDom);
-  ghost = document.getElementById(ghostID);
-  Utils.addClass(ghost, 'noty_fix_effects_height');
-  Utils.addListener(ghost, Utils.animationEndEvents, function () {
-    Utils.remove(ghost);
-  });
-}
-
-/**
- * @param {Noty} ref
- * @return {void}
- */
-function build(ref) {
-  findOrCreateContainer(ref);
-
-  var markup = '<div class="noty_body">' + ref.options.text + '</div>' + buildButtons(ref) + (ref.options.progressBar && ref.options.timeout ? '<div class="noty_progressbar"></div>' : '');
-
-  ref.barDom = document.createElement('div');
-  ref.barDom.setAttribute('id', ref.id);
-  Utils.addClass(ref.barDom, 'noty_bar noty_type__' + ref.options.type + ' noty_theme__' + ref.options.theme);
-
-  ref.barDom.innerHTML = markup;
-
-  fire(ref, 'onTemplate');
-}
-
-/**
- * @param {Noty} ref
- * @return {boolean}
- */
-function hasButtons(ref) {
-  return ref.options.buttons && Object.keys(ref.options.buttons).length ? true : false;
-}
-
-/**
- * @param {Noty} ref
- * @return {string}
- */
-function buildButtons(ref) {
-  if (hasButtons(ref)) {
-    var buttons = document.createElement('div');
-    Utils.addClass(buttons, 'noty_buttons');
-
-    Object.keys(ref.options.buttons).forEach(function (key) {
-      buttons.appendChild(ref.options.buttons[key].dom);
-    });
-
-    ref.options.buttons.forEach(function (btn) {
-      buttons.appendChild(btn.dom);
-    });
-    return buttons.outerHTML;
-  }
-  return '';
-}
-/**
- * @param {Noty} ref
- * @return {void}
- */
-function findOrCreateContainer(ref) {
-
-  if (ref.options.container) {
-    ref.layoutDom = document.querySelector(ref.options.container);
-    console.log(ref.layoutDom);
-    return;
-  }
-
-  var layoutID = 'noty_layout__' + ref.options.layout;
-  ref.layoutDom = document.querySelector('div#' + layoutID);
-
-  if (!ref.layoutDom) {
-    ref.layoutDom = document.createElement('div');
-    ref.layoutDom.setAttribute('id', layoutID);
-    document.querySelector('body').appendChild(ref.layoutDom);
-  }
-}
-
-/**
- * @param {Noty} ref
- * @return {void}
- */
-function queueClose(ref) {
-  if (ref.options.timeout) {
-
-    if (ref.options.progressBar && ref.progressDom) {
-      Utils.css(ref.progressDom, {
-        transition: 'width ' + ref.options.timeout + 'ms linear',
-        width: '0%'
+  var createStackOverlay = function(stack) {
+    var overlay = $("<div />", {"class": "ui-pnotify-modal-overlay"});
+    overlay.prependTo(stack.context);
+    if (stack.overlay_close) {
+      // Close the notices on overlay click.
+      overlay.click(function(){
+        PNotify.removeStack(stack);
       });
     }
+    return overlay;
+  };
+  var PNotify = function(options){
+    // === Class Variables ===
+    this.state = "initializing"; // The state can be "initializing", "opening", "open", "closing", and "closed".
+    this.timer = null; // Auto close timer.
+    this.animTimer = null; // Animation timer.
+    this.styles = null;
+    this.elem = null;
+    this.container = null;
+    this.title_container = null;
+    this.text_container = null;
+    this.animating = false; // Stores what is currently being animated (in or out).
+    this.timerHide = false; // Stores whether the notice was hidden by a timer.
 
-    ref.closeTimer = setTimeout(function () {
-      ref.close();
-    }, ref.options.timeout);
-  }
-}
+    this.parseOptions(options);
+    this.init();
+  };
+  $.extend(PNotify.prototype, {
+    // The current version of PNotify.
+    version: "3.2.0",
 
-/**
- * @param {Noty} ref
- * @return {void}
- */
-function dequeueClose(ref) {
-  if (ref.options.timeout && ref.closeTimer) {
-    clearTimeout(ref.closeTimer);
-    ref.closeTimer = 0;
+    // === Options ===
 
-    if (ref.options.progressBar && ref.progressDom) {
-      Utils.css(ref.progressDom, {
-        transition: 'width 0ms linear',
-        width: '100%'
-      });
-    }
-  }
-}
+    // Options defaults.
+    options: {
+      // The notice's title.
+      title: false,
+      // Whether to escape the content of the title. (Not allow HTML.)
+      title_escape: false,
+      // The notice's text.
+      text: false,
+      // Whether to escape the content of the text. (Not allow HTML.)
+      text_escape: false,
+      // What styling classes to use. (Can be either "brighttheme", "bootstrap3", or "fontawesome".)
+      styling: "brighttheme",
+      // Additional classes to be added to the notice. (For custom styling.)
+      addclass: "",
+      // Class to be added to the notice for corner styling.
+      cornerclass: "",
+      // Display the notice when it is created.
+      auto_display: true,
+      // Width of the notice.
+      width: "300px",
+      // Minimum height of the notice. It will expand to fit content.
+      min_height: "16px",
+      // Type of the notice. "notice", "info", "success", or "error".
+      type: "notice",
+      // Set icon to true to use the default icon for the selected
+      // style/type, false for no icon, or a string for your own icon class.
+      icon: true,
+      // The animation to use when displaying and hiding the notice. "none"
+      // and "fade" are supported through CSS. Others are supported
+      // through the Animate module and Animate.css.
+      animation: "fade",
+      // Speed at which the notice animates in and out. "slow", "normal",
+      // or "fast". Respectively, 400ms, 250ms, 100ms.
+      animate_speed: "normal",
+      // Display a drop shadow.
+      shadow: true,
+      // After a delay, remove the notice.
+      hide: true,
+      // Delay in milliseconds before the notice is removed.
+      delay: 8000,
+      // Reset the hide timer if the mouse moves over the notice.
+      mouse_reset: true,
+      // Remove the notice's elements from the DOM after it is removed.
+      remove: true,
+      // Change new lines to br tags.
+      insert_brs: true,
+      // Whether to remove the notice from the global array when it is closed.
+      destroy: true,
+      // The stack on which the notices will be placed. Also controls the
+      // direction the notices stack.
+      stack: default_stack
+    },
 
-/**
- * @param {Noty} ref
- * @param {string} eventName
- * @return {void}
- */
-function fire(ref, eventName) {
-  if (ref.listeners.hasOwnProperty(eventName)) {
-    ref.listeners[eventName].forEach(function (cb) {
-      if (typeof cb == 'function') cb.apply(ref);
-    });
-  }
-}
+    // === Modules ===
 
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+    // This object holds all the PNotify modules. They are used to provide
+    // additional functionality.
+    modules: {},
+    // This runs an event on all the modules.
+    runModules: function(event, arg){
+      var curArg;
+      for (var module in this.modules) {
+        curArg = ((typeof arg === "object" && module in arg) ? arg[module] : arg);
+        if (typeof this.modules[module][event] === 'function') {
+          this.modules[module].notice = this;
+          this.modules[module].options = typeof this.options[module] === 'object' ? this.options[module] : {};
+          this.modules[module][event](this, typeof this.options[module] === 'object' ? this.options[module] : {}, curArg);
+        }
+      }
+    },
 
+    // === Events ===
 
+    init: function(){
+      var that = this;
 
+      // First and foremost, we don't want our module objects all referencing the prototype.
+      this.modules = {};
+      $.extend(true, this.modules, PNotify.prototype.modules);
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.NotyButton = undefined;
-
-var _utils = __webpack_require__(0);
-
-var Utils = _interopRequireWildcard(_utils);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var NotyButton = exports.NotyButton = function NotyButton(html, classes, cb) {
-  var _this = this;
-
-  var attributes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
-
-  _classCallCheck(this, NotyButton);
-
-  this.dom = document.createElement('button');
-  this.dom.innerHTML = html;
-  this.id = attributes.id = attributes.id || Utils.generateID('button');
-  this.cb = cb;
-  Object.keys(attributes).forEach(function (propertyName) {
-    _this.dom.setAttribute(propertyName, attributes[propertyName]);
-  });
-  Utils.addClass(this.dom, classes || 'noty_btn');
-
-  return this;
-};
-
-/***/ }),
-/* 3 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* global VERSION */
-
-__webpack_require__(3);
-
-var _utils = __webpack_require__(0);
-
-var Utils = _interopRequireWildcard(_utils);
-
-var _api = __webpack_require__(1);
-
-var API = _interopRequireWildcard(_api);
-
-var _button = __webpack_require__(2);
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Noty = function () {
-  function Noty() {
-    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-    _classCallCheck(this, Noty);
-
-    this.options = Utils.deepExtend({}, API.Defaults, options);
-    this.id = this.options.id || Utils.generateID('bar');
-    this.closeTimer = -1;
-    this.barDom = null;
-    this.layoutDom = null;
-    this.progressDom = null;
-    this.shown = false;
-    this.closed = false;
-    this.listeners = {
-      beforeShow: [],
-      onShow: [],
-      afterShow: [],
-      onClose: [],
-      afterClose: [],
-      onHover: [],
-      onTemplate: []
-    };
-
-    this.on('beforeShow', this.options.callbacks.beforeShow);
-    this.on('onShow', this.options.callbacks.onShow);
-    this.on('afterShow', this.options.callbacks.afterShow);
-    this.on('onClose', this.options.callbacks.onClose);
-    this.on('afterClose', this.options.callbacks.afterClose);
-    this.on('onHover', this.options.callbacks.onHover);
-    this.on('onTemplate', this.options.callbacks.onTemplate);
-
-    return this;
-  }
-
-  _createClass(Noty, [{
-    key: 'on',
-    value: function on(eventName) {
-      var cb = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : function () {};
-
-      if (typeof cb == 'function' && this.listeners.hasOwnProperty(eventName)) this.listeners[eventName].push(cb);
-
-      return this;
-    }
-  }, {
-    key: 'show',
-    value: function show() {
-      var _this = this;
-
-      if (this.options.killer === true) {
-        Noty.closeAll();
-      } else if (typeof this.options.killer == 'string') {
-        Noty.closeAll(this.options.killer);
+      // Get our styling object.
+      if (typeof this.options.styling === "object") {
+        this.styles = this.options.styling;
       } else {
-        var queueCounts = API.getQueueCounts(this.options.queue);
+        this.styles = PNotify.styling[this.options.styling];
+      }
 
-        if (queueCounts.current >= queueCounts.maxVisible) {
-          API.addToQueue(this);
-          return this;
+      // Create our widget.
+      // Stop animation, reset the removal timer when the user mouses over.
+      this.elem = $("<div />", {
+        "class": "ui-pnotify "+this.options.addclass,
+        "css": {"display": "none"},
+        "aria-live": "assertive",
+        "aria-role": "alertdialog",
+        "mouseenter": function(e){
+          if (that.options.mouse_reset && that.animating === "out") {
+            if (!that.timerHide) {
+              return;
+            }
+            that.cancelRemove();
+          }
+          // Stop the close timer.
+          if (that.options.hide && that.options.mouse_reset) {
+            that.cancelRemove();
+          }
+        },
+        "mouseleave": function(e){
+          // Start the close timer.
+          if (that.options.hide && that.options.mouse_reset && that.animating !== "out") {
+            that.queueRemove();
+          }
+          PNotify.positionAll();
         }
-      }
-
-      API.Store[this.id] = this;
-
-      API.fire(this, 'beforeShow');
-
-      API.build(this);
-
-      if (this.options.force) this.layoutDom.insertBefore(this.barDom, this.layoutDom.firstChild);else this.layoutDom.appendChild(this.barDom);
-
-      this.shown = true;
-      this.closed = false;
-
-      // bind button events if any
-      if (API.hasButtons(this)) {
-        Object.keys(this.options.buttons).forEach(function (key) {
-          var btn = _this.barDom.querySelector('#' + _this.options.buttons[key].id);
-          Utils.addListener(btn, 'click', function (e) {
-            Utils.stopPropagation(e);
-            _this.options.buttons[key].cb();
-          });
-        });
-      }
-
-      this.progressDom = this.barDom.querySelector('.noty_progressbar');
-
-      if (Utils.inArray('click', this.options.closeWith)) {
-        Utils.addClass(this.barDom, 'noty_close_with_click');
-        Utils.addListener(this.barDom, 'click', function (e) {
-          Utils.stopPropagation(e);
-          _this.close();
-        }, false);
-      }
-
-      Utils.addListener(this.barDom, 'mouseenter', function () {
-        API.fire(_this, 'onHover');
-      }, false);
-
-      if (Utils.inArray('button', this.options.closeWith)) {
-        Utils.addClass(this.barDom, 'noty_close_with_button');
-
-        var closeButton = document.createElement('div');
-        Utils.addClass(closeButton, 'noty_close_button');
-        closeButton.innerHTML = '×';
-        this.barDom.appendChild(closeButton);
-
-        Utils.addListener(closeButton, 'click', function (e) {
-          Utils.stopPropagation(e);
-          _this.close();
-        }, false);
-      }
-
-      API.fire(this, 'onShow');
-      Utils.addClass(this.barDom, this.options.animation.open);
-
-      Utils.addListener(this.barDom, Utils.animationEndEvents, function () {
-        Utils.removeClass(_this.barDom, _this.options.animation.open);
-        API.fire(_this, 'afterShow');
-        API.queueClose(_this);
-
-        Utils.addListener(_this.barDom, 'mouseenter', function () {
-          API.dequeueClose(_this);
-        });
-
-        Utils.addListener(_this.barDom, 'mouseleave', function () {
-          API.queueClose(_this);
-        });
       });
-
-      return this;
-    }
-  }, {
-    key: 'stop',
-    value: function stop() {
-      API.dequeueClose(this);
-      return this;
-    }
-  }, {
-    key: 'resume',
-    value: function resume() {
-      API.queueClose(this);
-      return this;
-    }
-  }, {
-    key: 'setText',
-    value: function setText(html) {
-      var optionsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-      this.barDom.querySelector('.noty_body').innerHTML = html;
-
-      if (optionsOverride) this.options.text = html;
-
-      return this;
-    }
-  }, {
-    key: 'setType',
-    value: function setType(type) {
-      var optionsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-      var oldClass = 'noty_type__' + this.options.type;
-      var newClass = 'noty_type__' + type;
-      Utils.removeClass(this.barDom, oldClass);
-      Utils.addClass(this.barDom, newClass);
-
-      if (optionsOverride) this.options.type = type;
-
-      return this;
-    }
-  }, {
-    key: 'setTheme',
-    value: function setTheme(theme) {
-      var optionsOverride = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-
-      var oldClass = 'noty_theme__' + this.options.theme;
-      var newClass = 'noty_theme__' + theme;
-      Utils.removeClass(this.barDom, oldClass);
-      Utils.addClass(this.barDom, newClass);
-
-      if (optionsOverride) this.options.theme = theme;
-
-      return this;
-    }
-
-    /**
-     * @return {Noty}
-     */
-
-  }, {
-    key: 'close',
-    value: function close() {
-      var _this2 = this;
-
-      if (this.closed) return this;
-
-      if (!this.shown) {
-        // it's in the queue
-        API.removeFromQueue(this);
-        return this;
+      // Maybe we need to fade in/out.
+      if (this.options.animation === "fade") {
+        this.elem.addClass("ui-pnotify-fade-"+this.options.animate_speed);
+      }
+      // Create a container for the notice contents.
+      this.container = $("<div />", {
+        "class": this.styles.container+" ui-pnotify-container "+(this.options.type === "error" ? this.styles.error : (this.options.type === "info" ? this.styles.info : (this.options.type === "success" ? this.styles.success : this.styles.notice))),
+        "role": "alert"
+      }).appendTo(this.elem);
+      if (this.options.cornerclass !== "") {
+        this.container.removeClass("ui-corner-all").addClass(this.options.cornerclass);
+      }
+      // Create a drop shadow.
+      if (this.options.shadow) {
+        this.container.addClass("ui-pnotify-shadow");
       }
 
-      API.fire(this, 'onClose');
 
-      Utils.addClass(this.barDom, this.options.animation.close);
+      // Add the appropriate icon.
+      if (this.options.icon !== false) {
+        $("<div />", {"class": "ui-pnotify-icon"})
+        .append($("<span />", {"class": this.options.icon === true ? (this.options.type === "error" ? this.styles.error_icon : (this.options.type === "info" ? this.styles.info_icon : (this.options.type === "success" ? this.styles.success_icon : this.styles.notice_icon))) : this.options.icon}))
+        .prependTo(this.container);
+      }
 
-      this.closed = true;
+      // Add a title.
+      this.title_container = $("<h4 />", {
+        "class": "ui-pnotify-title"
+      })
+      .appendTo(this.container);
+      if (this.options.title === false) {
+        this.title_container.hide();
+      } else if (this.options.title_escape) {
+        this.title_container.text(this.options.title);
+      } else {
+        this.title_container.html(this.options.title);
+      }
 
-      Utils.addListener(this.barDom, Utils.animationEndEvents, function () {
-        if (_this2.options.force) {
-          Utils.remove(_this2.barDom);
+      // Add text.
+      this.text_container = $("<div />", {
+        "class": "ui-pnotify-text",
+        "aria-role": "alert"
+      })
+      .appendTo(this.container);
+      if (this.options.text === false) {
+        this.text_container.hide();
+      } else if (this.options.text_escape) {
+        this.text_container.text(this.options.text);
+      } else {
+        this.text_container.html(this.options.insert_brs ? String(this.options.text).replace(/\n/g, "<br />") : this.options.text);
+      }
+
+      // Set width and min height.
+      if (typeof this.options.width === "string") {
+        this.elem.css("width", this.options.width);
+      }
+      if (typeof this.options.min_height === "string") {
+        this.container.css("min-height", this.options.min_height);
+      }
+
+
+      // Add the notice to the notice array.
+      if (this.options.stack.push === "top") {
+        PNotify.notices = $.merge([this], PNotify.notices);
+      } else {
+        PNotify.notices = $.merge(PNotify.notices, [this]);
+      }
+      // Now position all the notices if they are to push to the top.
+      if (this.options.stack.push === "top") {
+        this.queuePosition(false, 1);
+      }
+
+
+      // Mark the stack so it won't animate the new notice.
+      this.options.stack.animation = false;
+
+      // Run the modules.
+      this.runModules('init');
+
+      // We're now initialized, but haven't been opened yet.
+      this.state = "closed";
+
+      // Display the notice.
+      if (this.options.auto_display) {
+        this.open();
+      }
+      return this;
+    },
+
+    // This function is for updating the notice.
+    update: function(options){
+      // Save old options.
+      var oldOpts = this.options;
+      // Then update to the new options.
+      this.parseOptions(oldOpts, options);
+      // Maybe we need to fade in/out.
+      this.elem.removeClass("ui-pnotify-fade-slow ui-pnotify-fade-normal ui-pnotify-fade-fast");
+      if (this.options.animation === "fade") {
+        this.elem.addClass("ui-pnotify-fade-"+this.options.animate_speed);
+      }
+      // Update the corner class.
+      if (this.options.cornerclass !== oldOpts.cornerclass) {
+        this.container.removeClass("ui-corner-all "+oldOpts.cornerclass).addClass(this.options.cornerclass);
+      }
+      // Update the shadow.
+      if (this.options.shadow !== oldOpts.shadow) {
+        if (this.options.shadow) {
+          this.container.addClass("ui-pnotify-shadow");
         } else {
-          API.ghostFix(_this2);
+          this.container.removeClass("ui-pnotify-shadow");
         }
-        delete API.Store[_this2.id];
-        API.fire(_this2, 'afterClose');
-
-        if (_this2.layoutDom.querySelectorAll('.noty_bar').length == 0 && !_this2.options.container) Utils.remove(_this2.layoutDom);
-
-        API.queueRender(_this2.options.queue);
-      });
-
-      return this;
-    }
-
-    // API functions
-
-    /**
-     * @param {boolean|string} queueName
-     * @return {Noty}
-     */
-
-  }], [{
-    key: 'closeAll',
-    value: function closeAll() {
-      var queueName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-      Object.keys(API.Store).forEach(function (id) {
-        if (queueName) {
-          if (API.Store[id].options.queue == queueName) API.Store[id].close();
+      }
+      // Update the additional classes.
+      if (this.options.addclass === false) {
+        this.elem.removeClass(oldOpts.addclass);
+      } else if (this.options.addclass !== oldOpts.addclass) {
+        this.elem.removeClass(oldOpts.addclass).addClass(this.options.addclass);
+      }
+      // Update the title.
+      if (this.options.title === false) {
+        this.title_container.slideUp("fast");
+      } else if (this.options.title !== oldOpts.title) {
+        if (this.options.title_escape) {
+          this.title_container.text(this.options.title);
         } else {
-          API.Store[id].close();
+          this.title_container.html(this.options.title);
+        }
+        if (oldOpts.title === false) {
+          this.title_container.slideDown(200);
+        }
+      }
+      // Update the text.
+      if (this.options.text === false) {
+        this.text_container.slideUp("fast");
+      } else if (this.options.text !== oldOpts.text) {
+        if (this.options.text_escape) {
+          this.text_container.text(this.options.text);
+        } else {
+          this.text_container.html(this.options.insert_brs ? String(this.options.text).replace(/\n/g, "<br />") : this.options.text);
+        }
+        if (oldOpts.text === false) {
+          this.text_container.slideDown(200);
+        }
+      }
+      // Change the notice type.
+      if (this.options.type !== oldOpts.type) {
+        this.container.removeClass(
+          this.styles.error+" "+this.styles.notice+" "+this.styles.success+" "+this.styles.info
+        ).addClass(this.options.type === "error" ?
+          this.styles.error :
+          (this.options.type === "info" ?
+            this.styles.info :
+            (this.options.type === "success" ?
+              this.styles.success :
+              this.styles.notice
+            )
+          )
+        );
+      }
+      if (this.options.icon !== oldOpts.icon || (this.options.icon === true && this.options.type !== oldOpts.type)) {
+        // Remove any old icon.
+        this.container.find("div.ui-pnotify-icon").remove();
+        if (this.options.icon !== false) {
+          // Build the new icon.
+          $("<div />", {"class": "ui-pnotify-icon"})
+          .append($("<span />", {"class": this.options.icon === true ? (this.options.type === "error" ? this.styles.error_icon : (this.options.type === "info" ? this.styles.info_icon : (this.options.type === "success" ? this.styles.success_icon : this.styles.notice_icon))) : this.options.icon}))
+          .prependTo(this.container);
+        }
+      }
+      // Update the width.
+      if (this.options.width !== oldOpts.width) {
+        this.elem.animate({width: this.options.width});
+      }
+      // Update the minimum height.
+      if (this.options.min_height !== oldOpts.min_height) {
+        this.container.animate({minHeight: this.options.min_height});
+      }
+      // Update the timed hiding.
+      if (!this.options.hide) {
+        this.cancelRemove();
+      } else if (!oldOpts.hide) {
+        this.queueRemove();
+      }
+      this.queuePosition(true);
+
+      // Run the modules.
+      this.runModules('update', oldOpts);
+      return this;
+    },
+
+    // Display the notice.
+    open: function(){
+      this.state = "opening";
+      // Run the modules.
+      this.runModules('beforeOpen');
+
+      var that = this;
+      // If the notice is not in the DOM, append it.
+      if (!this.elem.parent().length) {
+        this.elem.appendTo(this.options.stack.context ? this.options.stack.context : body);
+      }
+      // Try to put it in the right position.
+      if (this.options.stack.push !== "top") {
+        this.position(true);
+      }
+      this.animateIn(function(){
+        that.queuePosition(true);
+
+        // Now set it to hide.
+        if (that.options.hide) {
+          that.queueRemove();
+        }
+
+        that.state = "open";
+
+        // Run the modules.
+        that.runModules('afterOpen');
+      });
+
+      return this;
+    },
+
+    // Remove the notice.
+    remove: function(timer_hide) {
+      this.state = "closing";
+      this.timerHide = !!timer_hide; // Make sure it's a boolean.
+      // Run the modules.
+      this.runModules('beforeClose');
+
+      var that = this;
+      if (this.timer) {
+        root.clearTimeout(this.timer);
+        this.timer = null;
+      }
+      this.animateOut(function(){
+        that.state = "closed";
+        // Run the modules.
+        that.runModules('afterClose');
+        that.queuePosition(true);
+        // If we're supposed to remove the notice from the DOM, do it.
+        if (that.options.remove) {
+          that.elem.detach();
+        }
+        // Run the modules.
+        that.runModules('beforeDestroy');
+        // Remove object from PNotify.notices to prevent memory leak (issue #49)
+        // unless destroy is off
+        if (that.options.destroy) {
+          if (PNotify.notices !== null) {
+            var idx = $.inArray(that, PNotify.notices);
+            if (idx !== -1) {
+              PNotify.notices.splice(idx,1);
+            }
+          }
+        }
+        // Run the modules.
+        that.runModules('afterDestroy');
+      });
+
+      return this;
+    },
+
+    // === Class Methods ===
+
+    // Get the DOM element.
+    get: function(){
+      return this.elem;
+    },
+
+    // Put all the options in the right places.
+    parseOptions: function(options, moreOptions){
+      this.options = $.extend(true, {}, PNotify.prototype.options);
+      // This is the only thing that *should* be copied by reference.
+      this.options.stack = PNotify.prototype.options.stack;
+      var optArray = [options, moreOptions], curOpts;
+      for (var curIndex=0; curIndex < optArray.length; curIndex++) {
+        curOpts = optArray[curIndex];
+        if (typeof curOpts === "undefined") {
+          break;
+        }
+        if (typeof curOpts !== 'object') {
+          this.options.text = curOpts;
+        } else {
+          for (var option in curOpts) {
+            if (this.modules[option]) {
+              // Avoid overwriting module defaults.
+              $.extend(true, this.options[option], curOpts[option]);
+            } else {
+              this.options[option] = curOpts[option];
+            }
+          }
+        }
+      }
+    },
+
+    // Animate the notice in.
+    animateIn: function(callback){
+      // Declare that the notice is animating in.
+      this.animating = "in";
+      var that = this;
+      var finished = function(){
+        if (that.animTimer) {
+          clearTimeout(that.animTimer);
+        }
+        if (that.animating !== "in") {
+          return;
+        }
+        if (that.elem.is(":visible")) {
+          if (callback) {
+            callback.call();
+          }
+          // Declare that the notice has completed animating.
+          that.animating = false;
+        } else {
+          that.animTimer = setTimeout(finished, 40);
+        }
+      };
+
+      if (this.options.animation === "fade") {
+        this.elem.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionEnd transitionend', finished).addClass("ui-pnotify-in");
+        this.elem.css("opacity"); // This line is necessary for some reason. Some notices don't fade without it.
+        this.elem.addClass("ui-pnotify-fade-in");
+        // Just in case the event doesn't fire, call it after 650 ms.
+        this.animTimer = setTimeout(finished, 650);
+      } else {
+        this.elem.addClass("ui-pnotify-in");
+        finished();
+      }
+    },
+
+    // Animate the notice out.
+    animateOut: function(callback){
+      // Declare that the notice is animating out.
+      this.animating = "out";
+      var that = this;
+      var finished = function(){
+        if (that.animTimer) {
+          clearTimeout(that.animTimer);
+        }
+        if (that.animating !== "out") {
+          return;
+        }
+        if (that.elem.css("opacity") == "0" || !that.elem.is(":visible")) {
+          that.elem.removeClass("ui-pnotify-in");
+          if (that.options.stack.overlay) {
+            // Go through the modal stack to see if any are left open.
+            // TODO: Rewrite this cause it sucks.
+            var stillOpen = false;
+            $.each(PNotify.notices, function(i, notice){
+              if (notice != that && notice.options.stack === that.options.stack && notice.state != "closed") {
+                stillOpen = true;
+              }
+            });
+            if (!stillOpen) {
+              that.options.stack.overlay.hide();
+            }
+          }
+          if (callback) {
+            callback.call();
+          }
+          // Declare that the notice has completed animating.
+          that.animating = false;
+        } else {
+          // In case this was called before the notice finished animating.
+          that.animTimer = setTimeout(finished, 40);
+        }
+      };
+
+      if (this.options.animation === "fade") {
+        this.elem.one('webkitTransitionEnd mozTransitionEnd MSTransitionEnd oTransitionEnd transitionend', finished).removeClass("ui-pnotify-fade-in");
+        // Just in case the event doesn't fire, call it after 650 ms.
+        this.animTimer = setTimeout(finished, 650);
+      } else {
+        this.elem.removeClass("ui-pnotify-in");
+        finished();
+      }
+    },
+
+    // Position the notice. dont_skip_hidden causes the notice to
+    // position even if it's not visible.
+    position: function(dontSkipHidden){
+      // Get the notice's stack.
+      var stack = this.options.stack,
+        elem = this.elem;
+      if (typeof stack.context === "undefined") {
+        stack.context = body;
+      }
+      if (!stack) {
+        return;
+      }
+      if (typeof stack.nextpos1 !== "number") {
+        stack.nextpos1 = stack.firstpos1;
+      }
+      if (typeof stack.nextpos2 !== "number") {
+        stack.nextpos2 = stack.firstpos2;
+      }
+      if (typeof stack.addpos2 !== "number") {
+        stack.addpos2 = 0;
+      }
+      var hidden = !elem.hasClass("ui-pnotify-in");
+      // Skip this notice if it's not shown.
+      if (!hidden || dontSkipHidden) {
+        if (stack.modal) {
+          if (stack.overlay) {
+            stack.overlay.show();
+          } else {
+            stack.overlay = createStackOverlay(stack);
+          }
+        }
+        // Add animate class by default.
+        elem.addClass("ui-pnotify-move");
+        var curpos1, curpos2;
+        // Calculate the current pos1 value.
+        var csspos1;
+        switch (stack.dir1) {
+          case "down":
+            csspos1 = "top";
+            break;
+          case "up":
+            csspos1 = "bottom";
+            break;
+          case "left":
+            csspos1 = "right";
+            break;
+          case "right":
+            csspos1 = "left";
+            break;
+        }
+        curpos1 = parseInt(elem.css(csspos1).replace(/(?:\..*|[^0-9.])/g, ''));
+        if (isNaN(curpos1)) {
+          curpos1 = 0;
+        }
+        // Remember the first pos1, so the first visible notice goes there.
+        if (typeof stack.firstpos1 === "undefined" && !hidden) {
+          stack.firstpos1 = curpos1;
+          stack.nextpos1 = stack.firstpos1;
+        }
+        // Calculate the current pos2 value.
+        var csspos2;
+        switch (stack.dir2) {
+          case "down":
+            csspos2 = "top";
+            break;
+          case "up":
+            csspos2 = "bottom";
+            break;
+          case "left":
+            csspos2 = "right";
+            break;
+          case "right":
+            csspos2 = "left";
+            break;
+        }
+        curpos2 = parseInt(elem.css(csspos2).replace(/(?:\..*|[^0-9.])/g, ''));
+        if (isNaN(curpos2)) {
+          curpos2 = 0;
+        }
+        // Remember the first pos2, so the first visible notice goes there.
+        if (typeof stack.firstpos2 === "undefined" && !hidden) {
+          stack.firstpos2 = curpos2;
+          stack.nextpos2 = stack.firstpos2;
+        }
+        // Check that it's not beyond the viewport edge.
+        if (
+            (stack.dir1 === "down" && stack.nextpos1 + elem.height() > (stack.context.is(body) ? jwindow.height() : stack.context.prop('scrollHeight')) ) ||
+            (stack.dir1 === "up" && stack.nextpos1 + elem.height() > (stack.context.is(body) ? jwindow.height() : stack.context.prop('scrollHeight')) ) ||
+            (stack.dir1 === "left" && stack.nextpos1 + elem.width() > (stack.context.is(body) ? jwindow.width() : stack.context.prop('scrollWidth')) ) ||
+            (stack.dir1 === "right" && stack.nextpos1 + elem.width() > (stack.context.is(body) ? jwindow.width() : stack.context.prop('scrollWidth')) )
+          ) {
+          // If it is, it needs to go back to the first pos1, and over on pos2.
+          stack.nextpos1 = stack.firstpos1;
+          stack.nextpos2 += stack.addpos2 + (typeof stack.spacing2 === "undefined" ? 25 : stack.spacing2);
+          stack.addpos2 = 0;
+        }
+        if (typeof stack.nextpos2 === "number") {
+          if (!stack.animation) {
+            elem.removeClass("ui-pnotify-move");
+            elem.css(csspos2, stack.nextpos2+"px");
+            elem.css(csspos2);
+            elem.addClass("ui-pnotify-move");
+          } else {
+            elem.css(csspos2, stack.nextpos2+"px");
+          }
+        }
+        // Keep track of the widest/tallest notice in the column/row, so we can push the next column/row.
+        switch (stack.dir2) {
+          case "down":
+          case "up":
+            if (elem.outerHeight(true) > stack.addpos2) {
+              stack.addpos2 = elem.height();
+            }
+            break;
+          case "left":
+          case "right":
+            if (elem.outerWidth(true) > stack.addpos2) {
+              stack.addpos2 = elem.width();
+            }
+            break;
+        }
+        // Move the notice on dir1.
+        if (typeof stack.nextpos1 === "number") {
+          if (!stack.animation) {
+            elem.removeClass("ui-pnotify-move");
+            elem.css(csspos1, stack.nextpos1+"px");
+            elem.css(csspos1);
+            elem.addClass("ui-pnotify-move");
+          } else {
+            elem.css(csspos1, stack.nextpos1+"px");
+          }
+        }
+        // Calculate the next dir1 position.
+        switch (stack.dir1) {
+          case "down":
+          case "up":
+            stack.nextpos1 += elem.height() + (typeof stack.spacing1 === "undefined" ? 25 : stack.spacing1);
+            break;
+          case "left":
+          case "right":
+            stack.nextpos1 += elem.width() + (typeof stack.spacing1 === "undefined" ? 25 : stack.spacing1);
+            break;
+        }
+      }
+      return this;
+    },
+    // Queue the position all function so it doesn't run repeatedly and
+    // use up resources.
+    queuePosition: function(animate, milliseconds){
+      if (posTimer) {
+        clearTimeout(posTimer);
+      }
+      if (!milliseconds) {
+        milliseconds = 10;
+      }
+      posTimer = setTimeout(function(){
+        PNotify.positionAll(animate);
+      }, milliseconds);
+      return this;
+    },
+
+
+    // Cancel any pending removal timer.
+    cancelRemove: function(){
+      if (this.timer) {
+        root.clearTimeout(this.timer);
+      }
+      if (this.animTimer) {
+        root.clearTimeout(this.animTimer);
+      }
+      if (this.state === "closing") {
+        // If it's animating out, stop it.
+        this.state = "open";
+        this.animating = false;
+        this.elem.addClass("ui-pnotify-in");
+        if (this.options.animation === "fade") {
+          this.elem.addClass("ui-pnotify-fade-in");
+        }
+      }
+      return this;
+    },
+    // Queue a removal timer.
+    queueRemove: function(){
+      var that = this;
+      // Cancel any current removal timer.
+      this.cancelRemove();
+      this.timer = root.setTimeout(function(){
+        that.remove(true);
+      }, (isNaN(this.options.delay) ? 0 : this.options.delay));
+      return this;
+    }
+  });
+  // These functions affect all notices.
+  $.extend(PNotify, {
+    // This holds all the notices.
+    notices: [],
+    reload: init,
+    removeAll: function(){
+      $.each(PNotify.notices, function(i, notice){
+        if (notice.remove) {
+          notice.remove(false);
         }
       });
-      return this;
+    },
+    removeStack: function(stack){
+      $.each(PNotify.notices, function(i, notice){
+        if (notice.remove && notice.options.stack === stack) {
+          notice.remove(false);
+        }
+      });
+    },
+    positionAll: function(animate){
+      // This timer is used for queueing this function so it doesn't run
+      // repeatedly.
+      if (posTimer) {
+        clearTimeout(posTimer);
+      }
+      posTimer = null;
+      // Reset the next position data.
+      if (PNotify.notices && PNotify.notices.length) {
+        $.each(PNotify.notices, function(i, notice){
+          var s = notice.options.stack;
+          if (!s) {
+            return;
+          }
+          if (s.overlay) {
+            s.overlay.hide();
+          }
+          s.nextpos1 = s.firstpos1;
+          s.nextpos2 = s.firstpos2;
+          s.addpos2 = 0;
+          s.animation = animate;
+        });
+        $.each(PNotify.notices, function(i, notice){
+          notice.position();
+        });
+      } else {
+        var s = PNotify.prototype.options.stack;
+        if (s) {
+          delete s.nextpos1;
+          delete s.nextpos2;
+        }
+      }
+    },
+    styling: {
+      brighttheme: {
+        // Bright Theme doesn't require any UI libraries.
+        container: "brighttheme",
+        notice: "brighttheme-notice",
+        notice_icon: "brighttheme-icon-notice",
+        info: "brighttheme-info",
+        info_icon: "brighttheme-icon-info",
+        success: "brighttheme-success",
+        success_icon: "brighttheme-icon-success",
+        error: "brighttheme-error",
+        error_icon: "brighttheme-icon-error"
+      },
+      bootstrap3: {
+        container: "alert",
+        notice: "alert-warning",
+        notice_icon: "glyphicon glyphicon-exclamation-sign",
+        info: "alert-info",
+        info_icon: "glyphicon glyphicon-info-sign",
+        success: "alert-success",
+        success_icon: "glyphicon glyphicon-ok-sign",
+        error: "alert-danger",
+        error_icon: "glyphicon glyphicon-warning-sign"
+      }
     }
+  });
+  /*
+   * uses icons from http://fontawesome.io/
+   * version 4.0.3
+   */
+  PNotify.styling.fontawesome = $.extend({}, PNotify.styling.bootstrap3);
+  $.extend(PNotify.styling.fontawesome, {
+    notice_icon: "fa fa-exclamation-circle",
+    info_icon: "fa fa-info",
+    success_icon: "fa fa-check",
+    error_icon: "fa fa-warning"
+  });
 
-    /**
-     * @param {Object} obj
-     * @return {Noty}
-     */
+  if (root.document.body) {
+    do_when_ready();
+  } else {
+    $(do_when_ready);
+  }
+  return PNotify;
+};
+return init(root);
+}));
 
-  }, {
-    key: 'overrideDefaults',
-    value: function overrideDefaults(obj) {
-      API.Defaults = Utils.deepExtend({}, API.Defaults, obj);
-      return this;
+// Buttons
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as a module.
+    define('pnotify.buttons', ['jquery', 'pnotify'], factory);
+  } else if (typeof exports === 'object' && typeof module !== 'undefined') {
+    // CommonJS
+    module.exports = factory(require('jquery'), require('./pnotify'));
+  } else {
+    // Browser globals
+    factory(root.jQuery, root.PNotify);
+  }
+}(typeof window !== "undefined" ? window : this, function($, PNotify){
+  PNotify.prototype.options.buttons = {
+    // Provide a button for the user to manually close the notice.
+    closer: true,
+    // Only show the closer button on hover.
+    closer_hover: true,
+    // Provide a button for the user to manually stick the notice.
+    sticker: true,
+    // Only show the sticker button on hover.
+    sticker_hover: true,
+    // Show the buttons even when the nonblock module is in use.
+    show_on_nonblock: false,
+    // The various displayed text, helps facilitating internationalization.
+    labels: {
+      close: "Close",
+      stick: "Stick",
+      unstick: "Unstick"
+    },
+    // The classes to use for button icons. Leave them null to use the classes from the styling you're using.
+    classes: {
+      closer: null,
+      pin_up: null,
+      pin_down: null
     }
+  };
+  PNotify.prototype.modules.buttons = {
+    init: function(notice, options){
+      var that = this;
+      notice.elem.on({
+        "mouseenter": function(e){
+          // Show the buttons.
+          if (that.options.sticker && (!(notice.options.nonblock && notice.options.nonblock.nonblock) || that.options.show_on_nonblock)) {
+            that.sticker.trigger("pnotify:buttons:toggleStick").css("visibility", "visible");
+          }
+          if (that.options.closer && (!(notice.options.nonblock && notice.options.nonblock.nonblock) || that.options.show_on_nonblock)) {
+            that.closer.css("visibility", "visible");
+          }
+        },
+        "mouseleave": function(e){
+          // Hide the buttons.
+          if (that.options.sticker_hover) {
+            that.sticker.css("visibility", "hidden");
+          }
+          if (that.options.closer_hover) {
+            that.closer.css("visibility", "hidden");
+          }
+        }
+      });
 
-    /**
-     * @param {int} amount
-     * @param {string} queueName
-     * @return {Noty}
-     */
+      // Provide a button to stick the notice.
+      this.sticker = $("<div />", {
+        "class": "ui-pnotify-sticker",
+        "aria-role": "button",
+        "aria-pressed": notice.options.hide ? "false" : "true",
+        "tabindex": "0",
+        "title": notice.options.hide ? options.labels.stick : options.labels.unstick,
+        "css": {
+          "cursor": "pointer",
+          "visibility": options.sticker_hover ? "hidden" : "visible"
+        },
+        "click": function(){
+          notice.options.hide = !notice.options.hide;
+          if (notice.options.hide) {
+            notice.queueRemove();
+          } else {
+            notice.cancelRemove();
+          }
+          $(this).trigger("pnotify:buttons:toggleStick");
+        }
+      })
+      .bind("pnotify:buttons:toggleStick", function(){
+        var pin_up = that.options.classes.pin_up === null ? notice.styles.pin_up : that.options.classes.pin_up;
+        var pin_down = that.options.classes.pin_down === null ? notice.styles.pin_down : that.options.classes.pin_down;
+        $(this)
+        .attr("title", notice.options.hide ? that.options.labels.stick : that.options.labels.unstick)
+        .children()
+        .attr("class", "")
+        .addClass(notice.options.hide ? pin_up : pin_down)
+        .attr("aria-pressed", notice.options.hide ? "false" : "true");
+      })
+      .append("<span />")
+      .trigger("pnotify:buttons:toggleStick")
+      .prependTo(notice.container);
+      if (!options.sticker || (notice.options.nonblock && notice.options.nonblock.nonblock && !options.show_on_nonblock)) {
+        this.sticker.css("display", "none");
+      }
 
-  }, {
-    key: 'setMaxVisible',
-    value: function setMaxVisible() {
-      var amount = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : API.DefaultMaxVisible;
-      var queueName = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'global';
-
-      if (!API.Queues.hasOwnProperty(queueName)) API.Queues[queueName] = { maxVisible: amount, queue: [] };
-
-      API.Queues[queueName].maxVisible = amount;
-      return this;
+      // Provide a button to close the notice.
+      this.closer = $("<div />", {
+        "class": "ui-pnotify-closer",
+        "aria-role": "button",
+        "tabindex": "0",
+        "title": options.labels.close,
+        "css": {"cursor": "pointer", "visibility": options.closer_hover ? "hidden" : "visible"},
+        "click": function(){
+          notice.remove(false);
+          that.sticker.css("visibility", "hidden");
+          that.closer.css("visibility", "hidden");
+        }
+      })
+      .append($("<span />", {"class": options.classes.closer === null ? notice.styles.closer : options.classes.closer}))
+      .prependTo(notice.container);
+      if (!options.closer || (notice.options.nonblock && notice.options.nonblock.nonblock && !options.show_on_nonblock)) {
+        this.closer.css("display", "none");
+      }
+    },
+    update: function(notice, options){
+      // Update the sticker and closer buttons.
+      if (!options.closer || (notice.options.nonblock && notice.options.nonblock.nonblock && !options.show_on_nonblock)) {
+        this.closer.css("display", "none");
+      } else if (options.closer) {
+        this.closer.css("display", "block");
+      }
+      if (!options.sticker || (notice.options.nonblock && notice.options.nonblock.nonblock && !options.show_on_nonblock)) {
+        this.sticker.css("display", "none");
+      } else if (options.sticker) {
+        this.sticker.css("display", "block");
+      }
+      // Update the sticker icon.
+      this.sticker.trigger("pnotify:buttons:toggleStick");
+      // Update the close icon.
+      this.closer.find("span").attr("class", "").addClass(options.classes.closer === null ? notice.styles.closer : options.classes.closer);
+      // Update the hover status of the buttons.
+      if (options.sticker_hover) {
+        this.sticker.css("visibility", "hidden");
+      } else if (!(notice.options.nonblock && notice.options.nonblock.nonblock && !options.show_on_nonblock)) {
+        this.sticker.css("visibility", "visible");
+      }
+      if (options.closer_hover) {
+        this.closer.css("visibility", "hidden");
+      } else if (!(notice.options.nonblock && notice.options.nonblock.nonblock && !options.show_on_nonblock)) {
+        this.closer.css("visibility", "visible");
+      }
     }
+  };
+  $.extend(PNotify.styling.brighttheme, {
+    closer: "brighttheme-icon-closer",
+    pin_up: "brighttheme-icon-sticker",
+    pin_down: "brighttheme-icon-sticker brighttheme-icon-stuck"
+  });
+  $.extend(PNotify.styling.bootstrap3, {
+    closer: "glyphicon glyphicon-remove",
+    pin_up: "glyphicon glyphicon-pause",
+    pin_down: "glyphicon glyphicon-play"
+  });
+  $.extend(PNotify.styling.fontawesome, {
+    closer: "fa fa-times",
+    pin_up: "fa fa-pause",
+    pin_down: "fa fa-play"
+  });
+  return PNotify;
+}));
 
-    /**
-     * @param {string} innerHtml
-     * @param {String} classes
-     * @param {Function} cb
-     * @param {Object} attributes
-     * @return {NotyButton}
-     */
-
-  }, {
-    key: 'button',
-    value: function button(innerHtml) {
-      var classes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var cb = arguments[2];
-      var attributes = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
-
-      return new _button.NotyButton(innerHtml, classes, cb, attributes);
+// Desktop
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as a module.
+    define('pnotify.desktop', ['jquery', 'pnotify'], factory);
+  } else if (typeof exports === 'object' && typeof module !== 'undefined') {
+    // CommonJS
+    module.exports = factory(require('jquery'), require('./pnotify'));
+  } else {
+    // Browser globals
+    factory(root.jQuery, root.PNotify);
+  }
+}(typeof window !== "undefined" ? window : this, function($, PNotify){
+  var permission;
+  var notify = function(title, options){
+    // Memoize based on feature detection.
+    if ("Notification" in window) {
+      notify = function (title, options) {
+        return new Notification(title, options);
+      };
+    } else if ("mozNotification" in navigator) {
+      notify = function (title, options) {
+        // Gecko < 22
+        return navigator.mozNotification
+          .createNotification(title, options.body, options.icon)
+          .show();
+      };
+    } else if ("webkitNotifications" in window) {
+      notify = function (title, options) {
+        return window.webkitNotifications.createNotification(
+          options.icon,
+          title,
+          options.body
+        );
+      };
+    } else {
+      notify = function (title, options) {
+        return null;
+      };
     }
-  }, {
-    key: 'version',
-    value: function version() {
-      return "3.0.0";
+    return notify(title, options);
+  };
+
+
+  PNotify.prototype.options.desktop = {
+    // Display the notification as a desktop notification.
+    desktop: false,
+    // If desktop notifications are not supported or allowed, fall back to a regular notice.
+    fallback: true,
+    // The URL of the icon to display. If false, no icon will show. If null, a default icon will show.
+    icon: null,
+    // Using a tag lets you update an existing notice, or keep from duplicating notices between tabs.
+    // If you leave tag null, one will be generated, facilitating the "update" function.
+    // see: http://www.w3.org/TR/notifications/#tags-example
+    tag: null,
+    // Optionally display a different title for the desktop.
+    title: null,
+    // Optionally display different text for the desktop.
+    text: null
+  };
+  PNotify.prototype.modules.desktop = {
+    genNotice: function(notice, options){
+      if (options.icon === null) {
+        this.icon = "http://sciactive.com/pnotify/includes/desktop/"+notice.options.type+".png";
+      } else if (options.icon === false) {
+        this.icon = null;
+      } else {
+        this.icon = options.icon;
+      }
+      if (this.tag === null || options.tag !== null) {
+        this.tag = options.tag === null ? "PNotify-"+Math.round(Math.random() * 1000000) : options.tag;
+      }
+      notice.desktop = notify(options.title || notice.options.title, {
+        icon: this.icon,
+        body: options.text || notice.options.text,
+        tag: this.tag
+      });
+      if (!("close" in notice.desktop) && ("cancel" in notice.desktop)) {
+        notice.desktop.close = function(){
+          notice.desktop.cancel();
+        };
+      }
+      notice.desktop.onclick = function(){
+        notice.elem.trigger("click");
+      };
+      notice.desktop.onclose = function(){
+        if (notice.state !== "closing" && notice.state !== "closed") {
+          notice.remove();
+        }
+      };
+    },
+    init: function(notice, options){
+      if (!options.desktop)
+        return;
+      permission = PNotify.desktop.checkPermission();
+      if (permission !== 0) {
+        // Keep the notice from opening if fallback is false.
+        if (!options.fallback) {
+          notice.options.auto_display = false;
+        }
+        return;
+      }
+      this.genNotice(notice, options);
+    },
+    update: function(notice, options, oldOpts){
+      if ((permission !== 0 && options.fallback) || !options.desktop)
+        return;
+      this.genNotice(notice, options);
+    },
+    beforeOpen: function(notice, options){
+      if ((permission !== 0 && options.fallback) || !options.desktop)
+        return;
+      notice.elem.css({'left': '-10000px'}).removeClass('ui-pnotify-in');
+    },
+    afterOpen: function(notice, options){
+      if ((permission !== 0 && options.fallback) || !options.desktop)
+        return;
+      notice.elem.css({'left': '-10000px'}).removeClass('ui-pnotify-in');
+      if ("show" in notice.desktop) {
+        notice.desktop.show();
+      }
+    },
+    beforeClose: function(notice, options){
+      if ((permission !== 0 && options.fallback) || !options.desktop)
+        return;
+      notice.elem.css({'left': '-10000px'}).removeClass('ui-pnotify-in');
+    },
+    afterClose: function(notice, options){
+      if ((permission !== 0 && options.fallback) || !options.desktop)
+        return;
+      notice.elem.css({'left': '-10000px'}).removeClass('ui-pnotify-in');
+      if ("close" in notice.desktop) {
+        notice.desktop.close();
+      }
     }
-  }]);
+  };
+  PNotify.desktop = {
+    permission: function(){
+      if (typeof Notification !== "undefined" && "requestPermission" in Notification) {
+        Notification.requestPermission();
+      } else if ("webkitNotifications" in window) {
+        window.webkitNotifications.requestPermission();
+      }
+    },
+    checkPermission: function(){
+      if (typeof Notification !== "undefined" && "permission" in Notification) {
+        return (Notification.permission === "granted" ? 0 : 1);
+      } else if ("webkitNotifications" in window) {
+        return window.webkitNotifications.checkPermission() == 0 ? 0 : 1;
+      } else {
+        return 1;
+      }
+    }
+  };
+  permission = PNotify.desktop.checkPermission();
+  return PNotify;
+}));
 
-  return Noty;
-}();
+// Mobile
+(function (root, factory) {
+  if (typeof define === 'function' && define.amd) {
+    // AMD. Register as a module.
+    define('pnotify.mobile', ['jquery', 'pnotify'], factory);
+  } else if (typeof exports === 'object' && typeof module !== 'undefined') {
+    // CommonJS
+    module.exports = factory(require('jquery'), require('./pnotify'));
+  } else {
+    // Browser globals
+    factory(root.jQuery, root.PNotify);
+  }
+}(typeof window !== "undefined" ? window : this, function($, PNotify){
+  PNotify.prototype.options.mobile = {
+    // Let the user swipe the notice away.
+    swipe_dismiss: true,
+    // Styles the notice to look good on mobile.
+    styling: true
+  };
+  PNotify.prototype.modules.mobile = {
+    init: function(notice, options){
+      var that = this,
+          origX = null,
+          diffX = null,
+          noticeWidth = null;
 
-// Document visibility change controller
+      this.swipe_dismiss = options.swipe_dismiss;
+      this.doMobileStyling(notice, options);
+
+      notice.elem.on({
+        "touchstart": function(e){
+          if (!that.swipe_dismiss) {
+            return;
+          }
+
+          origX = e.originalEvent.touches[0].screenX;
+          noticeWidth = notice.elem.width();
+          notice.container.css("left", "0");
+        },
+        "touchmove": function(e){
+          if (!origX || !that.swipe_dismiss) {
+            return;
+          }
+
+          var curX = e.originalEvent.touches[0].screenX;
+
+          diffX = curX - origX;
+          var opacity = (1 - (Math.abs(diffX) / noticeWidth)) * notice.options.opacity;
+
+          notice.elem.css("opacity", opacity);
+          notice.container.css("left", diffX);
+        },
+        "touchend": function() {
+          if (!origX || !that.swipe_dismiss) {
+            return;
+          }
+
+          if (Math.abs(diffX) > 40) {
+            var goLeft = (diffX < 0) ? noticeWidth * -2 : noticeWidth * 2;
+            notice.elem.animate({"opacity": 0}, 100);
+            notice.container.animate({"left": goLeft}, 100);
+            notice.remove();
+          } else {
+            notice.elem.animate({"opacity": notice.options.opacity}, 100);
+            notice.container.animate({"left": 0}, 100);
+          }
+          origX = null;
+          diffX = null;
+          noticeWidth = null;
+        },
+        "touchcancel": function(){
+          if (!origX || !that.swipe_dismiss) {
+            return;
+          }
+
+          notice.elem.animate({"opacity": notice.options.opacity}, 100);
+          notice.container.animate({"left": 0}, 100);
+          origX = null;
+          diffX = null;
+          noticeWidth = null;
+        }
+      });
+    },
+    update: function(notice, options){
+      this.swipe_dismiss = options.swipe_dismiss;
+      this.doMobileStyling(notice, options);
+    },
+    doMobileStyling: function(notice, options){
+      if (options.styling) {
+        notice.elem.addClass("ui-pnotify-mobile-able");
+
+        if ($(window).width() <= 480) {
+          if (!notice.options.stack.mobileOrigSpacing1) {
+            notice.options.stack.mobileOrigSpacing1 = notice.options.stack.spacing1;
+            notice.options.stack.mobileOrigSpacing2 = notice.options.stack.spacing2;
+          }
+          notice.options.stack.spacing1 = 0;
+          notice.options.stack.spacing2 = 0;
+        } else if (notice.options.stack.mobileOrigSpacing1 || notice.options.stack.mobileOrigSpacing2) {
+          notice.options.stack.spacing1 = notice.options.stack.mobileOrigSpacing1;
+          delete notice.options.stack.mobileOrigSpacing1;
+          notice.options.stack.spacing2 = notice.options.stack.mobileOrigSpacing2;
+          delete notice.options.stack.mobileOrigSpacing2;
+        }
+      } else {
+        notice.elem.removeClass("ui-pnotify-mobile-able");
+
+        if (notice.options.stack.mobileOrigSpacing1) {
+          notice.options.stack.spacing1 = notice.options.stack.mobileOrigSpacing1;
+          delete notice.options.stack.mobileOrigSpacing1;
+        }
+        if (notice.options.stack.mobileOrigSpacing2) {
+          notice.options.stack.spacing2 = notice.options.stack.mobileOrigSpacing2;
+          delete notice.options.stack.mobileOrigSpacing2;
+        }
+      }
+    }
+  };
+  return PNotify;
+}));
 
 
-exports.default = Noty;
-Utils.visibilityChangeFlow();
-module.exports = exports['default'];
+define("lib/pnotify.custom", function(){});
 
-/***/ })
-/******/ ]);
+define('jquery',[],function() {
+    return jQuery;
 });
-//# sourceMappingURL=noty.js.map;
-define("lib/noty", function(){});
 
 /*
 
@@ -1106,7 +1408,7 @@ define("lib/noty", function(){});
 
 
 // load the noty library
-define('app/message',['lib/noty'], function() {
+/*define(['lib/noty'], function() {
 
   var deferred = $.Deferred();
 
@@ -1147,10 +1449,10 @@ define('app/message',['lib/noty'], function() {
   // return the public objects of this module
   return deferred.promise();
 
-});
+});*/
 
 
-/*define(['lib/pnotify.custom'], function() {
+define('app/message',['lib/pnotify.custom'], function() {
 
   var deferred = $.Deferred();
 
@@ -1191,8 +1493,8 @@ define('app/message',['lib/noty'], function() {
   // return the public objects of this module
   return deferred.promise();
 
-});*/
-;
+});
+
 /*
 
   This is the starting point for every application
@@ -1206,11 +1508,11 @@ window.starttime = performance.now();
 // Start with the main entry point
 requirejs(["app/main"], function(main) {
 
-  // Under which namespace should the module reside
+  // Under which namespace should the modules reside
   main.setNamespace("demo");
 
   // require all modules in this nested call and add them to the namespace
-  require(['app/message'], main.addModules);
+  require(['app/message'/*, 'app/module2'*/], main.addModules);
 
 });
 

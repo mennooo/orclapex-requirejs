@@ -11,7 +11,7 @@
 
 
 // load the noty library
-define(['lib/noty'], function() {
+/*define(['lib/noty'], function() {
 
   var deferred = $.Deferred();
 
@@ -52,10 +52,10 @@ define(['lib/noty'], function() {
   // return the public objects of this module
   return deferred.promise();
 
-});
+});*/
 
 
-/*define(['lib/pnotify.custom'], function() {
+define(['lib/pnotify.custom'], function() {
 
   var deferred = $.Deferred();
 
@@ -96,4 +96,4 @@ define(['lib/noty'], function() {
   // return the public objects of this module
   return deferred.promise();
 
-});*/
+});

@@ -9,8 +9,6 @@
 
 */
 
-//$.holdReady( true );
-
 (function() {
 
   // Get our current baseUrl
