@@ -3,7 +3,6 @@
   findNestedDependencies: true,
   name: 'app',
   out: "app-build.js",
-  optimize: "none",
   paths: {
     "jquery": "lib/jquery"
   },

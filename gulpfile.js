@@ -9,7 +9,6 @@ gulp.task('optimize', function() {
             baseUrl: 'src/js',
             findNestedDependencies: true,
             name: 'app',
-            optimize: "none",
             paths: {
                 "jquery": "lib/jquery"
             },
